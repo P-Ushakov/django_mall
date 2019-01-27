@@ -28,6 +28,8 @@ urlpatterns = [
     # wagtail block
     path('cms/', include(wagtailadmin_urls)),
     path('docs/', include(wagtaildocs_urls)),
-    path('', include(wagtail_urls))
+    path('', include(wagtail_urls)),
     # end of wagtail block
+    # home page
+
 ]
