@@ -5,13 +5,13 @@ from . import models
 # Группировка объектов по свойствам (помещения, вентустановки, лифты, ...)
 admin.site.register(models.MlGroup)
 # Распорядитель объекта (для комнаты - арендатор)
-admin.site.register(models.ObjDisposer)
+admin.site.register(models.MlObjDisposer)
 # Статус объекта (работает, нужен_аудит, нужен_ремонт, неработает, законсервирован, выключен)
-admin.site.register(models.ObjStatus)
+admin.site.register(models.MlObjStatus)
 # Объект учета системой (все в системе есть объект: от ТРЦ до двигателя вентустановки)
 admin.site.register(models.MlObject)
 # Группировка элементов пасспорта (вес, размер, мощность, производительность, .. и еденицы группировки):
-admin.site.register(models.MlObjectPassportKey)
+admin.site.register(models.MlObjPassportKey)
 # Элементы пасспортных данных объекта
 admin.site.register(models.MlObjPassportData)
 # Группировка контролируемых параметров объекта (например для помещений - температура)
@@ -29,7 +29,7 @@ admin.site.register(models.MlObjCounter)
 # (всегда вводятся начальные и конечные, т.к. счетчик может быть заменен)
 admin.site.register(models.MlObjCounterValues)
 # Документы, приложенные к объекту (чертежи, фото, схемы, ...)
-admin.site.register(models.AddedDocs)
+admin.site.register(models.MlObjAddedDocs)
 # Стандартные группы сервисного обслуживания.
 # Например Ежемесячное ТО, Ежеквартальное ТО, Ежегодное ТО, Консервация, Расконсервация, ...
 admin.site.register(models.MlServiceGroup)
@@ -42,7 +42,7 @@ admin.site.register(models.MlServiceList)
 admin.site.register(models.MlObjServiceWork)
 # Способы определения даты обслуживания (в конкретоном квартале, в конкретном времени года,
 # в конкретном месяце, раз в Х лет,  раз в Х месяцев, # раз в Х недель, раз в Х дней)
-admin.site.register(models.FreqType)
+admin.site.register(models.MlServiceFreqType)
 # Регламент бслуживания объекта (частота проведения разных видов ТО по объекту)
 admin.site.register(models.MlObjReglament)
 # Событийная система - срабатывает при определенном событии
