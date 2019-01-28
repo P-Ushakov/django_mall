@@ -84,7 +84,7 @@ TEMPLATES = [
         'DIRS': [
             # wagtail block
             # os.path.join(PROJECT_DIR, 'templates'),
-            os.path.join(PROJECT_DIR, 'django_mall/django_mall/templates'),
+            os.path.join(PROJECT_DIR, 'django_mall', 'django_mall', 'templates'),
             # end of wagtail block
         ],
         'APP_DIRS': True,
