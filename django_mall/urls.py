@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-# wagtailblock
-from  wagtail.core import urls as wagtail_urls
+# wagtail block
+from django.conf import settings
+from django.conf.urls.static import static
+
+# wagtail block
+from wagtail.core import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
@@ -32,4 +36,4 @@ urlpatterns = [
     # end of wagtail block
     # home page
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

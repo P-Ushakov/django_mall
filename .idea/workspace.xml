@@ -2,30 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80919050-ad6e-4985-b1ac-9722d8dfd035" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/django_mall/settings/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/settings/base.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/settings/dev.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/settings/production.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/static/css/wagtiletest03.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/static/js/wagtiletest03.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/templates/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/templates/500.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/migrations/0002_create_homepage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/migrations/0003_homepage_body.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/static/css/welcome_page.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/templates/home/home_page.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/templates/home/home_page.html.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/templates/home/welcome_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2807e10d-6a8e-422f-a109-e9e6926e73c3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2807e10d-6a8e-422f-a109-e9e6926e73c3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/django_mall/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/settings/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/settings/base.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/settings/dev.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/settings/production.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/static/css/wagtiletest03.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/static/js/wagtiletest03.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/django_mall/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/home_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/home_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/home_page.html.bak" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,41 +55,23 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+            <state relative-caret-position="1683">
+              <caret line="176" column="37" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/home/migrations/0003_homepage_body.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/home/migrations/0002_create_homepage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-648" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/django_mall/settings/dev.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/django_mall/settings/production.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/django_mall/settings/base.bak">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/django_mall/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -128,9 +98,9 @@
         <option value="$PROJECT_DIR$/mall/urls.py" />
         <option value="$PROJECT_DIR$/mall/models.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/django_mall/urls.py" />
         <option value="$PROJECT_DIR$/home/templates/models.py" />
         <option value="$PROJECT_DIR$/django_mall/settings.py" />
+        <option value="$PROJECT_DIR$/django_mall/urls.py" />
       </list>
     </option>
   </component>
@@ -259,17 +229,19 @@
       <workItem from="1548521155135" duration="1745000" />
       <workItem from="1548584586658" duration="5289000" />
       <workItem from="1548595502321" duration="6342000" />
-      <workItem from="1548606500781" duration="5642000" />
+      <workItem from="1548606500781" duration="8143000" />
+      <workItem from="1548691933841" duration="1882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19018000" />
+    <option name="totallyTimeSpent" value="23401000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15671642" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15831557" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -347,15 +319,9 @@
     <entry file="file://$PROJECT_DIR$/home/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/home/admin.py" />
+    <entry file="file://$PROJECT_DIR$/home/apps.py" />
+    <entry file="file://$PROJECT_DIR$/home/tests.py" />
     <entry file="file://$PROJECT_DIR$/mall/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -375,35 +341,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/home/home_page.new">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/views.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding>
-            <element signature="e#635#667#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/home_page.new" />
+    <entry file="file://$PROJECT_DIR$/home/views.py" />
     <entry file="file://$PROJECT_DIR$/home/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/models.py" />
     <entry file="file://$PROJECT_DIR$/home/static/css/welcome_page.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -423,29 +366,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
+    <entry file="file://$PROJECT_DIR$/home/migrations/0002_create_homepage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        <state relative-caret-position="-648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_mall/settings/production.bak" />
+    <entry file="file://$PROJECT_DIR$/django_mall/urls.bak">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/migrations/0003_homepage_body.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/migrations/0002_create_homepage.py">
+    <entry file="file://$PROJECT_DIR$/django_mall/settings/base.bak" />
+    <entry file="file://$PROJECT_DIR$/django_mall/settings/dev.bak" />
+    <entry file="file://$PROJECT_DIR$/django_mall/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648" />
+        <state relative-caret-position="1683">
+          <caret line="176" column="37" selection-start-line="176" selection-start-column="37" selection-end-line="176" selection-end-column="37" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/settings/base.bak">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/settings/dev.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/settings/production.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/django_mall/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
