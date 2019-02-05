@@ -27,12 +27,13 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
     path('mall/', include('mall.urls')),
-    path('admin/', admin.site.urls),
+    path('django-admin/', admin.site.urls),
 
     # wagtail block
-    path('cms/', include(wagtailadmin_urls)),
+    path('admin/', include(wagtailadmin_urls)),
     path('docs/', include(wagtaildocs_urls)),
     path('', include(wagtail_urls)),
+    # path('api/v2/', api_router.urls)
     # end of wagtail block
     # home page
 

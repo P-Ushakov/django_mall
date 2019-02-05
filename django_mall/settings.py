@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
-
+    # 'wagtail.api.v2'
     'modelcluster',
     'taggit',
     # End of Wagtail block
@@ -164,11 +164,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+'''
 ADMINS = [
     ('admin', '')
     # ('Your Name', 'your_email@example.com'),
 ]
 MANAGERS = ADMINS
+'''
 
 WAGTAIL_DATE_FORMAT = '%d.%m.%Y.'
 WAGTAIL_DATETIME_FORMAT = '%d.%m.%Y. %H:%M'

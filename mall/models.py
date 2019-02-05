@@ -1,5 +1,5 @@
-from datetime import datetime
-from django.db import models
+# Extends page_models
+from mall.page_models import *
 
 
 # Create your models here.
