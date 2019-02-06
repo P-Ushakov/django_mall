@@ -10,7 +10,7 @@
 
     <div class="intro">{{ page.intro }}</div>
 
-    {% for obj in page.get_children %}
+    {% for obj in ml_objects %}
         <h4><a href="{% pageurl obj %}">{{ obj.title }}</a> </h4>
         {{ obj.specific.intro }}
     {% endfor %}
