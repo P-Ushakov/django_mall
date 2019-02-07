@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-mlobjectindexpage{% endblock %}
 
@@ -9,10 +9,17 @@
     <h1> {{ page.titile }}</h1>
 
     <div class="intro">{{ page.intro }}</div>
-
-    {% for obj in ml_objects %}
-        <h4><a href="{% pageurl obj %}">{{ obj.title }}</a> </h4>
-        {{ obj.specific.intro }}
-    {% endfor %}
-
+    <div>
+        {% for obj in ml_objects %}
+            {% with obj=obj.specific %}
+                <h4><a href="{% pageurl obj %}">{{ obj.title }}</a> </h4>
+                {% with obj.main_image as main_image %}
+                    {% if main_image %}
+                        {% image main_image fill-160x100 %}
+                    {% endif %}
+                {% endwith %}
+                <p>{{ obj.intro }}</p>
+            {% endwith %}
+        {% endfor %}
+    </div>
 {% endblock %}

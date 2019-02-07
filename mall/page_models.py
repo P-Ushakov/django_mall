@@ -6,7 +6,9 @@ from django.db import models
 # Wagtail modules
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel,\
+    MultiFieldPanel, FieldRowPanel, InlinePanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 # other modules
@@ -20,6 +22,29 @@ from taggit.models import TaggedItemBase
 class MlObjectIndexPage(Page):
     intro = models.TextField(verbose_name='краткое описание',
                              blank=True)
+    # ToDo: Add tags
+
+    # logical block
+    # is system normally operating
+    is_enabled = models.BooleanField(default=True, verbose_name='группа включена')
+    # is critical for parent system
+    is_critical = models.BooleanField(default=True, verbose_name='группа критически важна')
+    # is object periodically diagnosed
+    diagnosed = models.BooleanField(default=True, verbose_name='группа осмотрена')
+    # have normal maintenance
+    have_maintenance = models.BooleanField(default=True, verbose_name='группа обслужена')
+    # object have cll-down to it's work
+    call_down = models.BooleanField(default=False, verbose_name='есть замечания')
+    # system working, but should be repaired
+    have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
+    # if critical and critically broken, then parent system broken too
+    is_critically_broken = models.BooleanField(default=False, verbose_name='группа сломана')
+    broken_if_all_elements_broken = models.BooleanField(default=False,
+                                                        verbose_name='группа сломана если все элементы сломаны')
+    # automatic fields
+    sub_elements = models.IntegerField(default=0, verbose_name='составные части')
+    broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
+    critically_broken_parts_count = models.IntegerField(default=0, verbose_name='критичных повреждений')
 
     # overriding default get_context to include only live objects, ordered by title
     def get_context(self, request, *args, **kwargs):
@@ -35,7 +60,34 @@ class MlObjectIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('is_enabled'),
+                FieldPanel('is_critical'),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('diagnosed'),
+                FieldPanel('have_maintenance'),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('call_down'),
+                FieldPanel('have_to_be_repaired'),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('is_critically_broken', classname="col6"),
+                FieldPanel('sub_elements', classname="col6"),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('broken_parts_count'),
+                FieldPanel('critically_broken_parts_count'),
+            ], classname=None),
+        ], heading="Состояние объекта",
+            classname="collapsible collapsed"),
         MultiFieldPanel([], heading='© Pavel Ushakov, BSD License'),
+    ]
+
+    settings_panels = Page.settings_panels + [
+        FieldPanel('broken_if_all_elements_broken'),
     ]
 
     class Meta:
@@ -94,6 +146,7 @@ class MlObjectPage(Page):
     # if critical and critically broken, then parent system broken too
     is_critically_broken = models.BooleanField(default=False, verbose_name='сломан')
     # automatic fields
+    sub_elements = models.IntegerField(default=0, verbose_name='составные части')
     broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
     critically_broken_parts_count = models.IntegerField(default=0, verbose_name='критичных повреждений')
 
@@ -103,31 +156,74 @@ class MlObjectPage(Page):
         index.SearchField('description'),
     ]
 
+    # logical block
+    def main_image(self):
+        gallery_item = self.gallery_images.first()
+        if gallery_item:
+            return gallery_item.image
+        else:
+            return None
+
     # control panels
     content_panels = Page.content_panels + [
         MultiFieldPanel([
-            FieldPanel('is_enabled'),
-            FieldPanel('is_critical'),
-            FieldPanel('diagnosed'),
-            FieldPanel('have_maintenance'),
-            FieldPanel('call_down'),
-            FieldPanel('have_to_be_repaired'),
-            FieldPanel('is_critically_broken'),
-
+            FieldRowPanel([
+                FieldPanel('is_enabled'),
+                FieldPanel('is_critical'),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('diagnosed'),
+                FieldPanel('have_maintenance'),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('call_down'),
+                FieldPanel('have_to_be_repaired'),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('is_critically_broken', classname="col6"),
+                FieldPanel('sub_elements', classname="col6"),
+            ], classname=None),
+            FieldRowPanel([
+                FieldPanel('broken_parts_count'),
+                FieldPanel('critically_broken_parts_count'),
+            ], classname=None),
         ], heading="Состояние объекта",
             classname="collapsible collapsed"),
         FieldPanel('tags'),
         FieldPanel('intro', classname="full"),
-        FieldPanel('description', classname="full"),
+        MultiFieldPanel([
+            FieldPanel('description', classname=None),
+        ], heading="Описание",
+            classname="full collapsible collapsed"),
+        MultiFieldPanel([
+            InlinePanel('gallery_images', label="Фото объекта"),
+        ], heading="Приложенные фото", classname="collapsible collapsed"),
         MultiFieldPanel([], heading='© Pavel Ushakov, BSD License')
     ]
 
     settings_panels = Page.settings_panels + [
         FieldPanel('buy_date'),
-        FieldPanel('broken_parts_count'),
-        FieldPanel('critically_broken_parts_count'),
+
     ]
 
     class Meta:
         verbose_name = "объект"
         verbose_name_plural = "объекты"
+
+
+class MlObjectGalleryImage(Orderable):
+    page = ParentalKey(MlObjectPage, on_delete=models.CASCADE,
+                       related_name='gallery_images',)
+    # noinspection PyUnresolvedReferences
+    image = models.ForeignKey('wagtailimages.Image',
+                              on_delete=models.CASCADE,
+                              related_name='+',
+                              verbose_name="фото")
+    caption = models.TextField(blank=True,
+                               verbose_name="Описание")
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('caption')
+    ]
+

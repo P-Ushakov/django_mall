@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    {% if request.GET.tag|length %}
+        <h4>Показаны страницы по тэгу "{{ request.GET.tag }}"</h4>
+    {% endif %}
+
+    {% for obj in ml_objects %}
+        <p>
+            <strong>
+                <a href="{% pageurl obj %}">{{ obj.title }}</a>
+            </strong>
+            <br />
+            <small>
+                Изменено: {{ obj.latest_revision_created_at }}
+            </small>
+            <br />
+            {% if obj.author %}
+                <p>автор{{ obj.author.profile }}</p>
+            {% endif %}
+        </p>
+    {% empty %}
+        нет объектов с таким тэгом
+    {% endfor %}
+{% endblock %}
