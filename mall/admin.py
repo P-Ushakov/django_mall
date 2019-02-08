@@ -3,7 +3,8 @@ from . import models
 
 # Register your models here.
 # Группировка объектов по свойствам (помещения, вентустановки, лифты, ...)
-admin.site.register(models.MlGroup)
+admin.site.register(models.MlCategory)
+"""
 # Распорядитель объекта (для комнаты - арендатор)
 admin.site.register(models.MlObjDisposer)
 # Статус объекта (работает, нужен_аудит, нужен_ремонт, неработает, законсервирован, выключен)
@@ -56,4 +57,4 @@ admin.site.register(models.MlTriggeredEventBook)
 admin.site.register(models.MlObjTaskBook)
 # Журнал Обслуживания объекта (автоматический лог)
 admin.site.register(models.MlObjServiceBook)
-
+"""

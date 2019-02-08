@@ -10,6 +10,8 @@ from wagtail.admin.edit_handlers import FieldPanel,\
     MultiFieldPanel, FieldRowPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 # other modules
 from datetime import datetime
@@ -23,7 +25,7 @@ class MlObjectIndexPage(Page):
     intro = models.TextField(verbose_name='краткое описание',
                              blank=True)
     # ToDo: Add tags
-
+    category = models.ForeignKey('mall.MlCategory', on_delete=models.SET_NULL, null=True)
     # logical block
     # is system normally operating
     is_enabled = models.BooleanField(default=True, verbose_name='группа включена')
@@ -60,6 +62,8 @@ class MlObjectIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
+        # ToDo http://qaru.site/questions/414650/django-adding-an-add-new-button-for-a-foreignkey-in-a-modelform
+        SnippetChooserPanel('category'),
         MultiFieldPanel([
             FieldRowPanel([
                 FieldPanel('is_enabled'),
@@ -120,6 +124,10 @@ class MlObjectTagIndexPage(Page):
         context = super().get_context(request)
         context['ml_objects'] = ml_objects
         return context
+
+    class Meta:
+        verbose_name = "ключи поиска"
+        verbose_name_plural = "ключи поиска"
 
 
 # Mall object

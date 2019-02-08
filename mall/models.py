@@ -4,21 +4,25 @@ from mall.page_models import *
 
 # Create your models here.
 # Группировка объектов по свойствам (помещения, вентустановки, лифты, ...)
-# todo: Переписать как Wagtail категории
-class MlGroup(models.Model):
+@register_snippet
+class MlCategory(models.Model):
     name = models.CharField(max_length=255,
                             verbose_name="имя")
     description = models.TextField(blank=True,
                                    verbose_name="описание")
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('description', classname='full')
+    ]
 
     def __str__(self):
         return self.name
 
     class Meta:
         # verbose_name = "object group"
-        verbose_name = "группа объекта"
+        verbose_name = "категория группы объектов"
         # verbose_name_plural = "object groups"
-        verbose_name_plural = "группы объектов"
+        verbose_name_plural = "категория группы объектов"
 
 
 # Распорядитель объекта (для комнаты - арендатор)
@@ -56,13 +60,13 @@ class MlObjStatus(models.Model):
         # verbose_name_plural = "object statuses"
         verbose_name_plural = "статусы объектов"
 
-
+"""
 # Объект учета системой (все в системе есть объект: от ТРЦ до двигателя вентустановки)
 class MlObject(models.Model):
     name = models.CharField(max_length=255)
     obj_upp_expense_cat = models.CharField(max_length=255, blank=True)
     obj_parents = models.ManyToManyField('self', blank=True)
-    obj_groups = models.ManyToManyField(MlGroup, blank=True)
+    obj_groups = models.ManyToManyField(MlCategory, blank=True)
     obj_status_id = models.ForeignKey(MlObjStatus,
                                       on_delete=models.SET_NULL,
                                       blank=True,
@@ -423,5 +427,6 @@ class MlObjServiceBook(models.Model):
     accept_task_trigger = models.DateTimeField()
     start_task_trigger = models.DateTimeField()
     task_person = models.CharField(max_length=255)
+"""
 
 # ToDo Журнал пресетов, таблица с БИМ структурой, журнал запчастей, собранный лог счетчиков
