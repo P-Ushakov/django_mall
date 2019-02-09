@@ -6,17 +6,17 @@ from mall.page_models import *
 # Группировка объектов по свойствам (помещения, вентустановки, лифты, ...)
 @register_snippet
 class MlCategory(models.Model):
-    name = models.CharField(max_length=255,
-                            verbose_name="имя")
+    title = models.CharField(max_length=255,
+                            verbose_name="название")
     description = models.TextField(blank=True,
                                    verbose_name="описание")
     panels = [
-        FieldPanel('name'),
+        FieldPanel('title'),
         FieldPanel('description', classname='full')
     ]
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         # verbose_name = "object group"
@@ -24,7 +24,7 @@ class MlCategory(models.Model):
         # verbose_name_plural = "object groups"
         verbose_name_plural = "категория группы объектов"
 
-
+"""
 # Распорядитель объекта (для комнаты - арендатор)
 class MlObjDisposer(models.Model):
     name = models.CharField(max_length=255,
@@ -60,7 +60,7 @@ class MlObjStatus(models.Model):
         # verbose_name_plural = "object statuses"
         verbose_name_plural = "статусы объектов"
 
-"""
+
 # Объект учета системой (все в системе есть объект: от ТРЦ до двигателя вентустановки)
 class MlObject(models.Model):
     name = models.CharField(max_length=255)

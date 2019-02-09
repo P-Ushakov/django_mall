@@ -7,24 +7,27 @@ from django.db import models
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel,\
-    MultiFieldPanel, FieldRowPanel, InlinePanel
+    MultiFieldPanel, FieldRowPanel, InlinePanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.documents.models import Document
+from wagtail.documents.edit_handlers import DocumentChooserPanel
 
 # other modules
 from datetime import datetime
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 
-# Mall object list
+# TODO: Make frontend Mall object list
 class MlObjectIndexPage(Page):
     intro = models.TextField(verbose_name='краткое описание',
                              blank=True)
-    # ToDo: Add tags
+    # ToDo: rewrite categories to "orderable" model
     category = models.ForeignKey('mall.MlCategory', on_delete=models.SET_NULL, null=True)
     # logical block
     # is system normally operating
@@ -62,8 +65,9 @@ class MlObjectIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full"),
-        # ToDo http://qaru.site/questions/414650/django-adding-an-add-new-button-for-a-foreignkey-in-a-modelform
-        SnippetChooserPanel('category'),
+        # Default field SnippestChooserPanel is changed to third party AutocompletePanel
+        # SnippetChooserPanel('category'),
+        AutocompletePanel('category', page_type='mall.MlCategory'),
         MultiFieldPanel([
             FieldRowPanel([
                 FieldPanel('is_enabled'),
@@ -98,6 +102,8 @@ class MlObjectIndexPage(Page):
         verbose_name = "список объектов"
         verbose_name_plural = "список объектов"
 
+    subpage_types = ['MlObjectPage', 'MlObjectIndexPage']
+
 
 # Mall object tag
 class MlObjectTag(TaggedItemBase):
@@ -112,7 +118,7 @@ class MlObjectTag(TaggedItemBase):
         verbose_name_plural = "ключи поиска"
 
 
-# List of tags
+# TODO: Make frontend # List of tags
 class MlObjectTagIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
 
@@ -129,10 +135,53 @@ class MlObjectTagIndexPage(Page):
         verbose_name = "ключи поиска"
         verbose_name_plural = "ключи поиска"
 
+# TODO: Make frontend
+class MlObjDisposerList(Page):
+    pass
 
-# Mall object
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "спиок распорядителей"
+        verbose_name_plural = "списки распорядителей"
+
+    subpage_types = ['mall.MlObjDisposer', 'mall.MlObjDisposerList']
+
+
+# TODO: Make frontend # Mall object disposer (for example owner of the shop, which rent the room)
+class MlObjDisposer(Page):
+    description = models.TextField(blank=True,
+                                   verbose_name="описание")
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            InlinePanel('disposer_docs', label="Приложение"),
+        ], heading="Приложенные документы", classname="collapsible collapsed"),
+        MultiFieldPanel([], heading='© Pavel Ushakov, BSD License')]
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        # verbose_name = "object disposer"
+        verbose_name = "распорядитель объекта"
+        # verbose_name_plural = "object disposers"
+        verbose_name_plural = "распорядители объектов"
+
+    parent_page_types = ['mall.MlObjDisposerList']
+
+
+# TODO: Make frontend # Mall object
 class MlObjectPage(Page):
-    buy_date = models.DateField("дата приобретения", blank=True, null=True)
+    disposer_id = models.ForeignKey('wagtailcore.Page',
+                                    null=True,
+                                    blank=True,
+                                    on_delete=models.SET_NULL,
+                                    related_name='+',
+                                    verbose_name="распорядитель объекта")
+    start_date = models.DateField("начало", blank=True, null=True)
+    status_ok = models.BooleanField("параметры в норме", default=True)
     intro = models.TextField(verbose_name='краткое описание',
                              blank=True)
     description = RichTextField(blank=True, verbose_name='описание')
@@ -174,6 +223,16 @@ class MlObjectPage(Page):
 
     # control panels
     content_panels = Page.content_panels + [
+
+        # Default field PageChooserPanel is changed to third party AutocompletePanel
+        # PageChooserPanel('disposer_id', 'mall.MlObjDisposer'),
+        MultiFieldPanel([
+            AutocompletePanel('disposer_id', page_type='mall.MlObjDisposer'),
+            FieldRowPanel([
+                FieldPanel('start_date'),
+                FieldPanel('status_ok'),
+            ], classname=None),
+        ], heading="Кто расроряжается:", classname="collapsible collapsed"),
         MultiFieldPanel([
             FieldRowPanel([
                 FieldPanel('is_enabled'),
@@ -204,15 +263,25 @@ class MlObjectPage(Page):
         ], heading="Описание",
             classname="full collapsible collapsed"),
         MultiFieldPanel([
+            InlinePanel('ml_obj_docs', label="Приложение"),
+        ], heading="Приложенные документы", classname="collapsible collapsed"),
+        MultiFieldPanel([], heading='© Pavel Ushakov, BSD License'),
+    ]
+
+    promote_panels = Page.promote_panels + [
+        MultiFieldPanel([
             InlinePanel('gallery_images', label="Фото объекта"),
         ], heading="Приложенные фото", classname="collapsible collapsed"),
-        MultiFieldPanel([], heading='© Pavel Ushakov, BSD License')
+        MultiFieldPanel([], heading='© Pavel Ushakov, BSD License'),
     ]
 
     settings_panels = Page.settings_panels + [
-        FieldPanel('buy_date'),
+
 
     ]
+
+    parent_page_types = ['mall.MlObjectIndexPage']
+    #subpage_types = []
 
     class Meta:
         verbose_name = "объект"
@@ -235,3 +304,38 @@ class MlObjectGalleryImage(Orderable):
         FieldPanel('caption')
     ]
 
+
+# attachments for objects
+class MlObjectLibrary(Orderable):
+    page = ParentalKey(MlObjectPage, on_delete=models.CASCADE,
+                       related_name='ml_obj_docs',)
+    # noinspection PyUnresolvedReferences
+    document = models.ForeignKey('wagtaildocs.Document',
+                              on_delete=models.CASCADE,
+                              related_name='+',
+                              verbose_name="документ")
+    caption = models.TextField(blank=True,
+                               verbose_name="Описание")
+
+    panels = [
+        DocumentChooserPanel('document'),
+        FieldPanel('caption')
+    ]
+
+
+# attachments for disposers
+class DisposerLibrary(Orderable):
+    page = ParentalKey(MlObjDisposer, on_delete=models.CASCADE,
+                       related_name='disposer_docs',)
+    # noinspection PyUnresolvedReferences
+    document = models.ForeignKey('wagtaildocs.Document',
+                              on_delete=models.CASCADE,
+                              related_name='+',
+                              verbose_name="документ")
+    caption = models.TextField(blank=True,
+                               verbose_name="Описание")
+
+    panels = [
+        DocumentChooserPanel('document'),
+        FieldPanel('caption')
+    ]

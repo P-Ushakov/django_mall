@@ -27,7 +27,7 @@
         {# Global javascript #}
         <script defer src="{% static 'js/fontawesome_all.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/django_mall.js' %}"></script>
-
+        {% wagtailuserbar %}
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
@@ -48,7 +48,7 @@
                         </ul>
                     </nav>
                 {% endif %}
-                {#  wagtailuserbar  #}
+
                 {% block content %}
                     Some content
                 {% endblock %}

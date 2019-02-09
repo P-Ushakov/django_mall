@@ -2,7 +2,9 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% comment %}
 {% block body_class %}template-mlobjectpage{% endblock %}
+{% endcomment %}
 
 {% block content %}
     <p><a href="{{ page.get_parent.url }}">Вернутся к {{ page.get_parent.title }}</a> </p>
@@ -17,7 +19,7 @@
             {% endfor %}
         </div>
     {% endif %}
-    <p class="meta">{{ page.buy_date }}</p>
+    <p class="meta">{{ page.start_date }}</p>
 
     <div class="intro">{{ page.intro }}</div>
 
