@@ -10,21 +10,22 @@
 
     <div class="intro">{{ page.intro }}</div>
     <div>
-        <div class="row">
-        {% for obj in ml_objects %}
-            {% with obj=obj.specific %}
-                <div class="col-sm-3">
-                    <div class="card border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-header"><a href="{% pageurl obj %}">{{ obj.title }}</a></div>
-                        <div class="card-body">
-                            <h7 class="card-title text-success">Параметры в норме</h7>
-                            <p class="card-text">{{ obj.intro }}</p>
-                        </div>
-                    </div>
+    {% for obj in ml_objects %}
+        <!--<div class="row">-->
+        {% with obj=obj.specific %}
+            <div class="col-sm-offset-12">
+                <div class="alert border-success mb-6" role="alert">
+                    <h6 class="alert-heading"><a href="{% pageurl obj %}">{{ obj.title }}</a></h6>
+                    <p>{{ obj.intro }}</p>
+                    <hr>
+                    <p class="alert-success mb-0">параметры в норме</p>
                 </div>
-            {% endwith %}
-        {% endfor %}
-        </div>
+            </div>
+        {% endwith %}
+    {% endfor %}
+    </div>
+
+
                 {% comment %}
                 <h4><a href="{% pageurl obj %}">{{ obj.title }}</a> </h4>
                 {% with obj.main_image as main_image %}
