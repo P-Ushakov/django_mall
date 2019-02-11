@@ -142,6 +142,14 @@ class MlObjDisposerList(Page):
     def __str__(self):
         return self.title
 
+    # overriding default get_context to include only live objects, ordered by title
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+        # can be ordered by published date: order_by('-first_published_at')
+        ml_disposer_list = self.get_children().live().order_by('title')
+        context['ml_disposer_list'] = ml_disposer_list
+        return context
+
     class Meta:
         verbose_name = "спиок распорядителей"
         verbose_name_plural = "списки распорядителей"
@@ -149,12 +157,18 @@ class MlObjDisposerList(Page):
     subpage_types = ['mall.MlObjDisposer', 'mall.MlObjDisposerList']
 
 
+
+
+
 # TODO: Make frontend # Mall object disposer (for example owner of the shop, which rent the room)
 class MlObjDisposer(Page):
-    description = models.TextField(blank=True,
-                                   verbose_name="описание")
+    description = RichTextField(blank=True, verbose_name="описание")
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('description', classname=None),
+        ], heading="Описание",
+            classname="full collapsible collapsed"),
         MultiFieldPanel([
             InlinePanel('disposer_docs', label="Приложение"),
         ], heading="Приложенные документы", classname="collapsible collapsed"),

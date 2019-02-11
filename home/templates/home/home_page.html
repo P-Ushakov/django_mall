@@ -19,5 +19,30 @@
     Delete the line below if you're just getting started and want to remove the welcome screen!
     {% include 'home/welcome_page.html' %}
     {% endcomment %}
+
+    <!-- Main menu -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Django Mall</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
+    <ul class="nav navbar-nav navbar-right">
+        {% for obj in menu_items %}
+            <!--<div class="row">-->
+            {# with obj=obj.specific #}
+              <!--  <li class="nav-item"> -->
+                    <a class="nav-item nav-link" href="{% pageurl obj %}">{{ obj.title }}</a></h6>
+               <!-- </li> -->
+                {# endwith #}
+        {% endfor %}
+        </ul>
+    </div>
+</nav>
+<div class="container alert border-success mb-6" role="alert">
+    <!-- Richtext static body -->
     {{page.body|richtext}}
+</div>
 {% endblock content %}

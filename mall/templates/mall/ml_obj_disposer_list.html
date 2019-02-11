@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-mlobjectdisposerlist{% endblock %}
+
+{% block content %}
+    <p><a href="{{ page.get_parent.url }}">Вернутся к {{ page.get_parent.title }}</a> </p>
+
+    <div>
+    {% for obj in ml_disposer_list %}
+        <!--<div class="row">-->
+        {% with obj=obj.specific %}
+            <div class="col-sm-offset-12">
+                <div class="alert border-success mb-6" role="alert">
+                    <h6 class="alert-heading"><a href="{% pageurl obj %}">{{ obj.title }}</a></h6>
+                </div>
+            </div>
+        {% endwith %}
+    {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,6 +1,17 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
 {% block content %}
-    <p>
-        {{ page.title }}
-    </p>
+
+    <p><a href="{{ page.get_parent.url }}">Вернутся к {{ page.get_parent.title }}</a> </p>
+
+    <div class="alert border-success mb-6" role="alert">
+        <div class="alert-heading title">
+            <h5>{{ page.title }}</h5>
+        </div>
+        <hr>
+        <div>
+            {{ page.description|richtext }}
+        </div>
+    </div>
+
 {% endblock %}

@@ -54,7 +54,13 @@
             <script type="text/javascript" src="{% static 'js/django_mall.js' %}"></script>
         {% endcomment %}
 
-        {# Bootstrap 4 CDN #}
+        {# JQuery 3 CDN #}
+        <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+
+		{# Bootstrap 4 CDN #}
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
         {# Wagtail circle navbar (bottom right by default) #}
@@ -75,7 +81,7 @@
                                     <li class="breadcrumb-item"><a href="{% pageurl page %}">{{ page.title }}</a></li>
                                 {% endif %}
                             {% endfor %}
-                            <li class="breadcrumb-item active"><a href="{% pageurl self %}" aria-current="page">{{ self.title }}</a></li>
+                            <li class="breadcrumb-item active"><a href="{% pageurl self %}" class="alert-link" aria-current="page">{{ self.title }}</a></li>
                         </ol>
                     </nav>
                 {% endif %}
