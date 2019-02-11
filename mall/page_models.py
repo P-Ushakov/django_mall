@@ -118,13 +118,27 @@ class MlObjectTag(TaggedItemBase):
         verbose_name_plural = "ключи поиска"
 
 
+# Mall object tag
+class MlObjectAutoTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'MlObjectPage',
+        related_name='auto_tagged_items',
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        verbose_name = "состояние"
+        verbose_name_plural = "состояние"
+
+
 # TODO: Make frontend # List of tags
 class MlObjectTagIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
 
         # Filter by tag
         tag = request.GET.get('tag')
-        ml_objects = MlObjectPage.objects.filter(tags__name=tag)
+        # Вот уж намудрили с фильтрами :(
+        ml_objects = MlObjectPage.objects.filter(models.Q(auto_tags__name=tag) | models.Q(tags__name=tag))
 
         # Update template context
         context = super().get_context(request)
@@ -155,9 +169,6 @@ class MlObjDisposerList(Page):
         verbose_name_plural = "списки распорядителей"
 
     subpage_types = ['mall.MlObjDisposer', 'mall.MlObjDisposerList']
-
-
-
 
 
 # TODO: Make frontend # Mall object disposer (for example owner of the shop, which rent the room)
@@ -200,6 +211,10 @@ class MlObjectPage(Page):
                              blank=True)
     description = RichTextField(blank=True, verbose_name='описание')
     tags = ClusterTaggableManager(through=MlObjectTag, blank=True, verbose_name='ключи поиска')
+    auto_tags = ClusterTaggableManager(through=MlObjectAutoTag,
+                                       blank=True,
+                                       verbose_name='состояние',
+                                       related_name='ml_obj_auto_tags',)
 
     # logical block
     # is system normally operating
@@ -215,7 +230,7 @@ class MlObjectPage(Page):
     # system working, but should be repaired
     have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
     # if critical and critically broken, then parent system broken too
-    is_critically_broken = models.BooleanField(default=False, verbose_name='сломан')
+    is_critically_broken = models.BooleanField(default=False, verbose_name='авария')
     # automatic fields
     sub_elements = models.IntegerField(default=0, verbose_name='составные части')
     broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
@@ -235,17 +250,53 @@ class MlObjectPage(Page):
         else:
             return None
 
-    # overrride save metod
+    # override save method
     def save(self, *args, **kwargs):
-        is_crit = self.is_critical
+
         crit = self.is_critically_broken
+        if crit:
+            self.have_to_be_repaired = True
+
+        # AUTOMATIC TAGS
+
+        tag_dict = {
+            'status_ok_tag':            chr(9989),   # статус Ok
+            'status_bad_tag':           chr(9940),   # статус Bad &#
+            'is_enabled_tag':           chr(9728),   # включен
+            'is_critical_tag':          chr(10084),  # критически важен алт символ &#9825
+            'diagnosed_tag':            chr(9874),   # осмотрен - таг должен изменится до ТО
+            'need_service_tag':         chr(9997),   # пришло время периодического обслуживания
+            'have_maintenance_tag':     chr(9730),   # обслужен во время
+            'call_down_tag':            chr(9785),   # замечания
+            'have_to_be_repaired_tag':  chr(9888),   # требует ремонта
+            'is_critically_broken_tag': chr(9760),   # сломан
+        }
+
+        self.auto_tags.clear()
+
+        if self.status_ok:
+            self.auto_tags.add(tag_dict['status_ok_tag'])
+        else:
+            self.auto_tags.add(tag_dict['status_bad_tag'])
+        if self.diagnosed:
+            self.auto_tags.add(tag_dict['diagnosed_tag'])
+        else:
+            self.auto_tags.add(tag_dict['need_service_tag'])
+        if self.is_enabled:
+            self.auto_tags.add(tag_dict['is_enabled_tag'])
+        if self.is_critical:
+            self.auto_tags.add(tag_dict['is_critical_tag'])
+        if self.have_maintenance:
+            self.auto_tags.add(tag_dict['have_maintenance_tag'])
+        if self.call_down:
+            self.auto_tags.add(tag_dict['call_down'])
+        if self.have_to_be_repaired:
+            self.auto_tags.add(tag_dict['have_to_be_repaired'])
+        if self.is_critically_broken:
+            self.auto_tags.add(tag_dict['is_critically_broken'])
+
 
         """
-
-        a = self.get_parent(update=True)
-        a.specific.is_critically_broken = crit
-
-       
         if crit and is_crit:
             ancestors = reversed(self.get_ancestors())
             for ancestor in ancestors:
@@ -307,6 +358,7 @@ class MlObjectPage(Page):
         ], heading="Состояние объекта",
             classname="collapsible collapsed"),
         FieldPanel('tags'),
+        FieldPanel('auto_tags'),
         FieldPanel('intro', classname="full"),
         MultiFieldPanel([
             FieldPanel('description', classname=None),
