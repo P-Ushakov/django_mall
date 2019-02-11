@@ -122,7 +122,7 @@ class MlObjectTag(TaggedItemBase):
 class MlObjectAutoTag(TaggedItemBase):
     content_object = ParentalKey(
         'MlObjectPage',
-        related_name='auto_tagged_items',
+        related_name='ml_obj_auto_tags',
         on_delete=models.CASCADE
     )
 
@@ -289,11 +289,11 @@ class MlObjectPage(Page):
         if self.have_maintenance:
             self.auto_tags.add(tag_dict['have_maintenance_tag'])
         if self.call_down:
-            self.auto_tags.add(tag_dict['call_down'])
+            self.auto_tags.add(tag_dict['call_down_tag'])
         if self.have_to_be_repaired:
-            self.auto_tags.add(tag_dict['have_to_be_repaired'])
+            self.auto_tags.add(tag_dict['have_to_be_repaired_tag'])
         if self.is_critically_broken:
-            self.auto_tags.add(tag_dict['is_critically_broken'])
+            self.auto_tags.add(tag_dict['is_critically_broken_tag'])
 
 
         """
