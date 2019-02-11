@@ -235,6 +235,42 @@ class MlObjectPage(Page):
         else:
             return None
 
+    # overrride save metod
+    def save(self, *args, **kwargs):
+        is_crit = self.is_critical
+        crit = self.is_critically_broken
+
+        """
+
+        a = self.get_parent(update=True)
+        a.specific.is_critically_broken = crit
+
+       
+        if crit and is_crit:
+            ancestors = reversed(self.get_ancestors())
+            for ancestor in ancestors:
+                if ancestor.title != "root":
+                    with ancestor.specific.is_critically_broken as crit_brok:
+
+                        if crit_brok:
+                            is_crit = ancestor.specific.is_critical
+                            continue
+                        alarm = True
+
+                        with ancestor.specific.broken_if_all_elements_broken as brok:
+                            if brok:
+                                childr = ancestors.get_children().live()
+                                for child in childr:
+                                    if (child.specific.is_critically_broken == False) and \
+                                            (child.specific.is_critical == True):
+                                        alarm = False
+                        if is_crit:
+                            ancestor.specific.is_critically_broken = alarm
+                            is_crit = ancestor.specific.is_critical
+        """
+        #TODO: change tags claster (self.tags.add('auto_alarm',"events"))
+        super(MlObjectPage, self).save()
+
     # control panels
     content_panels = Page.content_panels + [
 
