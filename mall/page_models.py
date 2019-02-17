@@ -44,8 +44,8 @@ class MlObjectIndexPage(Page):
     have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
     # if critical and critically broken, then parent system broken too
     is_critically_broken = models.BooleanField(default=False, verbose_name='группа сломана')
-    broken_if_all_elements_broken = models.BooleanField(default=False,
-                                                        verbose_name='группа сломана если все элементы сломаны')
+    broken_if_num_elements_broken = models.IntegerField(default=0,
+                                                        verbose_name='группа сломана если N элементов требует ремонта')
     # automatic fields
     sub_elements = models.IntegerField(default=0, verbose_name='составные части')
     broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
@@ -95,7 +95,7 @@ class MlObjectIndexPage(Page):
     ]
 
     settings_panels = Page.settings_panels + [
-        FieldPanel('broken_if_all_elements_broken'),
+        FieldPanel('broken_if_num_elements_broken'),
     ]
 
     class Meta:

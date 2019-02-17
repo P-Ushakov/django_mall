@@ -1,6 +1,6 @@
 # Extends page_models
 from mall.page_models import *
-
+# from mall.ml_signals import *
 
 # Create your models here.
 # Группировка объектов по свойствам (помещения, вентустановки, лифты, ...)
