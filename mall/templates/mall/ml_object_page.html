@@ -15,7 +15,14 @@
             <div class="tags">
                 <h6>метки:</h6>
                 {% for tag in page.tags.all %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}">
+
+                    {% comment %}
+                    {% with ""|add:tag|add:"&id"|add:page.id|add:"/" as my_tag %}
+                        {% include my_tag %}
+                    {% endwith %}
+                    {% endcomment %}
+
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
                         <button class="alert border-success" type="button">{{ tag }}</button>
                     </a>
                 {% endfor %}
@@ -27,7 +34,7 @@
             <div class="tags">
                 <h6>состояние:</h6>
                 {% for tag in page.auto_tags.all %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}">
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
                         <button class="alert border-success" type="button">{{ tag }}</button>
                     </a>
                 {% endfor %}

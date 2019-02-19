@@ -3,23 +3,27 @@
 
 {% block content %}
     {% if request.GET.tag|length %}
-        <h4>Показаны страницы по тэгу "{{ request.GET.tag }}"</h4>
+        <div class="alert border-success">
+            <h5>показаны страницы по тэгу "{{ request.GET.tag }}"</h5>
+        </div>
     {% endif %}
 
     {% for obj in ml_objects %}
-        <p>
-            <strong>
-                <a href="{% pageurl obj %}">{{ obj.title }}</a>
-            </strong>
-            <br />
-            <small>
-                Изменено: {{ obj.latest_revision_created_at }}
-            </small>
-            <br />
-            {% if obj.author %}
-                <p>автор{{ obj.author.profile }}</p>
-            {% endif %}
-        </p>
+        <div class="alert border-success mb-4">
+            <p>
+                <strong>
+                    <a href="{% pageurl obj %}">{{ obj.title }}</a>
+                </strong>
+                <br />
+                <small>
+                    Изменено: {{ obj.latest_revision_created_at }}
+                </small>
+                <br />
+                {% if obj.author %}
+                    <p>автор{{ obj.author.profile }}</p>
+                {% endif %}
+            </p>
+        </div>
     {% empty %}
         нет объектов с таким тэгом
     {% endfor %}

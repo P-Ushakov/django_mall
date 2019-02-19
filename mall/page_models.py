@@ -137,9 +137,20 @@ class MlObjectTagIndexPage(Page):
 
         # Filter by tag
         tag = request.GET.get('tag')
+        id = int(request.GET.get('id'))
         # Вот уж намудрили с фильтрами :(
-        ml_objects = MlObjectPage.objects.filter(models.Q(auto_tags__name=tag) | models.Q(tags__name=tag))
-
+        # ml_objects = MlObjectPage.objects.filter(models.Q(auto_tags__name=tag) | models.Q(tags__name=tag))
+        ml_object = MlObjectPage.objects.get(id=id)
+        # parent_ml_object = ml_object.get_parent()
+        descentants_ml_objects = MlObjectPage.objects.descendant_of(ml_object, inclusive=True).live()
+        ml_objects = descentants_ml_objects.filter(auto_tags__name=tag)
+        if not ml_objects:
+            ml_objects = descentants_ml_objects.filter(tags__name=tag)
+        """
+        ml_objects = MlObjectPage.objects.filter(auto_tags__name=tag)
+        if not ml_objects:
+            ml_objects = MlObjectPage.objects.filter(tags__name=tag)
+        """
         # Update template context
         context = super().get_context(request)
         context['ml_objects'] = ml_objects
