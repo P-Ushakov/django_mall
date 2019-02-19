@@ -44,8 +44,13 @@ class MlObjectIndexPage(Page):
     have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
     # if critical and critically broken, then parent system broken too
     is_critically_broken = models.BooleanField(default=False, verbose_name='группа сломана')
+    # settings fields
+    # group is critically_broken if all elements have to be repaired
     broken_if_num_elements_broken = models.IntegerField(default=0,
                                                         verbose_name='группа сломана если N элементов требует ремонта')
+    # group is visible for tags. If False - group close local scope of tags
+    is_visible_for_tags = models.BooleanField(default=True, verbose_name="группа видна для дочерних меток")
+
     # automatic fields
     sub_elements = models.IntegerField(default=0, verbose_name='составные части')
     broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
@@ -96,6 +101,7 @@ class MlObjectIndexPage(Page):
 
     settings_panels = Page.settings_panels + [
         FieldPanel('broken_if_num_elements_broken'),
+        FieldPanel('is_visible_for_tags'),
     ]
 
     class Meta:
@@ -139,21 +145,32 @@ class MlObjectTagIndexPage(Page):
         tag = request.GET.get('tag')
         id = int(request.GET.get('id'))
         # Вот уж намудрили с фильтрами :(
-        # ml_objects = MlObjectPage.objects.filter(models.Q(auto_tags__name=tag) | models.Q(tags__name=tag))
+        # ml_object_tags = MlObjectPage.objects.filter(models.Q(auto_tags__name=tag) | models.Q(tags__name=tag))
         ml_object = MlObjectPage.objects.get(id=id)
         # parent_ml_object = ml_object.get_parent()
-        descentants_ml_objects = MlObjectPage.objects.descendant_of(ml_object, inclusive=True).live()
-        ml_objects = descentants_ml_objects.filter(auto_tags__name=tag)
-        if not ml_objects:
-            ml_objects = descentants_ml_objects.filter(tags__name=tag)
+        descendants_ml_objects = MlObjectPage.objects.descendant_of(ml_object, inclusive=True).live()
+        ml_object_tags = descendants_ml_objects.filter(auto_tags__name=tag)
+
+        # manual tags: lift up on the tree root before finding "is_visible_for_tags : False
+        if not ml_object_tags:
+            ancestors_ml_object_group = \
+                reversed(MlObjectIndexPage.objects.ancestor_of(ml_object))
+            for ancestor in ancestors_ml_object_group:
+                if ancestor.specific.is_visible_for_tags:
+                    ml_object = ancestor
+            ml_object_parent = ml_object.get_parent()
+            if ml_object_parent.specific_class == MlObjectPage:
+                ml_object = ml_object_parent
+            descendants_ml_objects = MlObjectPage.objects.descendant_of(ml_object, inclusive=True).live()
+            ml_object_tags = descendants_ml_objects.filter(tags__name=tag)
         """
-        ml_objects = MlObjectPage.objects.filter(auto_tags__name=tag)
-        if not ml_objects:
-            ml_objects = MlObjectPage.objects.filter(tags__name=tag)
+        ml_object_tags = MlObjectPage.objects.filter(auto_tags__name=tag)
+        if not ml_object_tags:
+            ml_object_tags = MlObjectPage.objects.filter(tags__name=tag)
         """
         # Update template context
         context = super().get_context(request)
-        context['ml_objects'] = ml_objects
+        context['ml_object_tags'] = ml_object_tags
         return context
 
     class Meta:
