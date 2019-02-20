@@ -278,6 +278,29 @@ class MlObjectPage(Page):
         else:
             return None
 
+    # colored borders for objects
+    def ml_obj_border(self):
+        tags = self.auto_tags.all()
+        border = "success"
+        for tag in tags:
+            if tag.name == chr(9760):
+                border = "danger"
+        return border
+
+        # AUTOMATIC TAGS
+    tag_dict = {
+        'status_ok_tag':            chr(9989),  # статус Ok
+        'status_bad_tag':           chr(9940),  # статус Bad &#
+        'is_enabled_tag':           chr(9728),  # включен
+        'is_critical_tag':          chr(10084),  # критически важен алт символ &#9825
+        'diagnosed_tag':            chr(9874),  # осмотрен - таг должен изменится до ТО
+        'need_service_tag':         chr(9997),  # пришло время периодического обслуживания
+        'have_maintenance_tag':     chr(9730),  # обслужен во время
+        'call_down_tag':            chr(9785),  # замечания
+        'have_to_be_repaired_tag':  chr(9888),  # требует ремонта
+        'is_critically_broken_tag': chr(9760),  # сломан
+    }
+
     # override save method
     def save(self, *args, **kwargs):
 
@@ -285,43 +308,28 @@ class MlObjectPage(Page):
         if crit:
             self.have_to_be_repaired = True
 
-        # AUTOMATIC TAGS
-
-        tag_dict = {
-            'status_ok_tag':            chr(9989),   # статус Ok
-            'status_bad_tag':           chr(9940),   # статус Bad &#
-            'is_enabled_tag':           chr(9728),   # включен
-            'is_critical_tag':          chr(10084),  # критически важен алт символ &#9825
-            'diagnosed_tag':            chr(9874),   # осмотрен - таг должен изменится до ТО
-            'need_service_tag':         chr(9997),   # пришло время периодического обслуживания
-            'have_maintenance_tag':     chr(9730),   # обслужен во время
-            'call_down_tag':            chr(9785),   # замечания
-            'have_to_be_repaired_tag':  chr(9888),   # требует ремонта
-            'is_critically_broken_tag': chr(9760),   # сломан
-        }
-
         self.auto_tags.clear()
 
         if self.status_ok:
-            self.auto_tags.add(tag_dict['status_ok_tag'])
+            self.auto_tags.add(self.tag_dict['status_ok_tag'])
         else:
-            self.auto_tags.add(tag_dict['status_bad_tag'])
+            self.auto_tags.add(self.tag_dict['status_bad_tag'])
         if self.diagnosed:
-            self.auto_tags.add(tag_dict['diagnosed_tag'])
+            self.auto_tags.add(self.tag_dict['diagnosed_tag'])
         else:
-            self.auto_tags.add(tag_dict['need_service_tag'])
+            self.auto_tags.add(self.tag_dict['need_service_tag'])
         if self.is_enabled:
-            self.auto_tags.add(tag_dict['is_enabled_tag'])
+            self.auto_tags.add(self.tag_dict['is_enabled_tag'])
         if self.is_critical:
-            self.auto_tags.add(tag_dict['is_critical_tag'])
+            self.auto_tags.add(self.tag_dict['is_critical_tag'])
         if self.have_maintenance:
-            self.auto_tags.add(tag_dict['have_maintenance_tag'])
+            self.auto_tags.add(self.tag_dict['have_maintenance_tag'])
         if self.call_down:
-            self.auto_tags.add(tag_dict['call_down_tag'])
+            self.auto_tags.add(self.tag_dict['call_down_tag'])
         if self.have_to_be_repaired:
-            self.auto_tags.add(tag_dict['have_to_be_repaired_tag'])
+            self.auto_tags.add(self.tag_dict['have_to_be_repaired_tag'])
         if self.is_critically_broken:
-            self.auto_tags.add(tag_dict['is_critically_broken_tag'])
+            self.auto_tags.add(self.tag_dict['is_critically_broken_tag'])
 
 
         """

@@ -8,7 +8,7 @@
 
 {% block content %}
     <p><a href="{{ page.get_parent.url }}">Вернутся к {{ page.get_parent.title }}</a> </p>
-    <div class="alert border-success mb-4" role="alert">
+    <div class="alert border-{{ page.ml_obj_border }} mb-4" role="alert">
         <h5> {{ page.title }}</h5>
         <!-- Manual tags -->
         {% if page.tags.all.count %}
