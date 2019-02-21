@@ -22,6 +22,22 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
+# AUTOMATIC TAGS             symbol      description         border influence
+TAG_DICT = {
+    'status_ok_tag': (chr(9989), "статус Ok", "success", 7),  # ✅
+    'status_bad_tag': (chr(9940), "статус Bad", "danger", 25),  # ⛔
+    'is_enabled_tag': (chr(9212), "включено", "success", 5),  # ⏼
+    'is_disabled_tag': (chr(9211), "выключено", "dark", 30),  # ⏻
+    'diagnosed_tag': (chr(9874), "осмотрен", "success", 3),  # ⚒
+    'have_to_be_diagnosed': (chr(8263), "пришло время осмотра", "info", 15),  # ⏰⏰⏰⏰⏰⁇
+    'need_service_tag': (chr(9997), "пришло время TO", "info", 18),  # ✍
+    'have_maintenance_tag': (chr(9730), "прошел ТО", "success", 2),  # ☂
+    'is_critical_tag': (chr(8252), "критически важен", "success", 4),  # ‼
+    'call_down_tag': (chr(9785), "есть замечания", "warning", 20),  # ☹
+    'have_to_be_repaired_tag': (chr(9888), "требует ремонта", "warning", 23),  # ⚠
+    'is_critically_broken_tag': (chr(9760), "сломано", "danger", 28),  # ☠
+}
+
 
 # TODO: Make frontend Mall object list
 class MlObjectIndexPage(Page):
@@ -278,28 +294,22 @@ class MlObjectPage(Page):
         else:
             return None
 
+
+
     # colored borders for objects
     def ml_obj_border(self):
         tags = self.auto_tags.all()
         border = "success"
+        influence = 0
         for tag in tags:
-            if tag.name == chr(9760):
-                border = "danger"
+            for key in TAG_DICT:
+                if TAG_DICT[key][0] == tag.name and influence < TAG_DICT[key][3]:
+                    influence = TAG_DICT[key][3]
+                    border = TAG_DICT[key][2]
         return border
 
-        # AUTOMATIC TAGS
-    tag_dict = {
-        'status_ok_tag':            chr(9989),  # статус Ok
-        'status_bad_tag':           chr(9940),  # статус Bad &#
-        'is_enabled_tag':           chr(9728),  # включен
-        'is_critical_tag':          chr(10084),  # критически важен алт символ &#9825
-        'diagnosed_tag':            chr(9874),  # осмотрен - таг должен изменится до ТО
-        'need_service_tag':         chr(9997),  # пришло время периодического обслуживания
-        'have_maintenance_tag':     chr(9730),  # обслужен во время
-        'call_down_tag':            chr(9785),  # замечания
-        'have_to_be_repaired_tag':  chr(9888),  # требует ремонта
-        'is_critically_broken_tag': chr(9760),  # сломан
-    }
+
+
 
     # override save method
     def save(self, *args, **kwargs):
@@ -311,25 +321,25 @@ class MlObjectPage(Page):
         self.auto_tags.clear()
 
         if self.status_ok:
-            self.auto_tags.add(self.tag_dict['status_ok_tag'])
+            self.auto_tags.add(TAG_DICT['status_ok_tag'][0])
         else:
-            self.auto_tags.add(self.tag_dict['status_bad_tag'])
+            self.auto_tags.add(TAG_DICT['status_bad_tag'][0])
         if self.diagnosed:
-            self.auto_tags.add(self.tag_dict['diagnosed_tag'])
+            self.auto_tags.add(TAG_DICT['diagnosed_tag'][0])
         else:
-            self.auto_tags.add(self.tag_dict['need_service_tag'])
+            self.auto_tags.add(TAG_DICT['need_service_tag'][0])
         if self.is_enabled:
-            self.auto_tags.add(self.tag_dict['is_enabled_tag'])
+            self.auto_tags.add(TAG_DICT['is_enabled_tag'][0])
         if self.is_critical:
-            self.auto_tags.add(self.tag_dict['is_critical_tag'])
+            self.auto_tags.add(TAG_DICT['is_critical_tag'][0])
         if self.have_maintenance:
-            self.auto_tags.add(self.tag_dict['have_maintenance_tag'])
+            self.auto_tags.add(TAG_DICT['have_maintenance_tag'][0])
         if self.call_down:
-            self.auto_tags.add(self.tag_dict['call_down_tag'])
+            self.auto_tags.add(TAG_DICT['call_down_tag'][0])
         if self.have_to_be_repaired:
-            self.auto_tags.add(self.tag_dict['have_to_be_repaired_tag'])
+            self.auto_tags.add(TAG_DICT['have_to_be_repaired_tag'][0])
         if self.is_critically_broken:
-            self.auto_tags.add(self.tag_dict['is_critically_broken_tag'])
+            self.auto_tags.add(TAG_DICT['is_critically_broken_tag'][0])
 
 
         """
