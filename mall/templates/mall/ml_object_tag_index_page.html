@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags ml_tags %}
 
 {% block content %}
     {% if request.GET.tag|length %}
         <div class="alert border-success">
-            <h5>показаны страницы по тэгу "{{ request.GET.tag }}"</h5>
+            <h5>{% ml_tag_header request.GET.tag %} ({{ request.GET.tag }})</h5>
         </div>
     {% endif %}
 
     {% for obj in ml_object_tags %}
-        <div class="alert border-success mb-4">
+        <div class="alert border-{{ obj.ml_obj_border }} mb-4">
             <p>
                 <strong>
                     <a href="{% pageurl obj %}">{{ obj.title }}</a>

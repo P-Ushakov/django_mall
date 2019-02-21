@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags ml_tags %}
 
 {% block body_class %}template-mlobjectindexpage{% endblock %}
 
@@ -13,11 +13,20 @@
         <!--<div class="row">-->
         {% with obj=obj.specific %}
             <div class="col-sm-offset-12">
-                <div class="alert border-success mb-6" role="alert">
+                <div class="alert border-{{ obj.ml_obj_border }} mb-6" role="alert">
                     <h6 class="alert-heading"><a href="{% pageurl obj %}">{{ obj.title }}</a></h6>
                     <p>{{ obj.intro }}</p>
                     <hr>
-                    <p class="alert-success mb-0">параметры в норме</p>
+                    <!-- Automatic tags -->
+                    {% if obj.auto_tags.all.count %}
+                        <div class="tags">
+                        {% for tag in obj.auto_tags.all %}
+                            <a href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ obj.id }}">
+                                <button type="button" class="btn alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %}" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{{ tag }}</button>
+                            </a>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endwith %}

@@ -23,7 +23,7 @@
                     {% endcomment %}
 
                     <a href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
-                        <button class="alert border-success" type="button">{{ tag }}</button>
+                        <button class="alert border-success" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{{ tag }}</button>
                     </a>
                 {% endfor %}
             </div>
@@ -48,10 +48,17 @@
     </div>
     <div>
     {% for obj in page.get_children %}
-        <div class="alert border-success mb-4" role="alert">
-        <h6><a href="{% pageurl obj %}">{{ obj.title }}</a> </h6>
-        {{ obj.specific.intro }}
-        </div>
+        {# alert colors #}
+        {% if obj.specific.ml_list_alert_color %}
+            <div class="alert {{ obj.specific.ml_list_alert_color }} mb-4" role="alert">
+        {% else %}
+            <div class="alert border-success mb-4" role="alert">
+        {% endif %}
+                {# alert #}
+                <h6><a href="{% pageurl obj %}">{{ obj.title }}</a> </h6>
+                {{ obj.specific.intro }}
+                {% ml_get_badges obj.id %}
+            </div>
     {% endfor %}
     </div>
 

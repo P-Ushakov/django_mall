@@ -1,0 +1,6 @@
+{% for key, value in unique_tag_list %}
+    <button type="button" class="btn btn-primary">
+      {{ key }} <span class="badge badge-light">{{ value }}</span>
+      <span class="sr-only">unread messages</span>
+    </button>
+{% endfor %}

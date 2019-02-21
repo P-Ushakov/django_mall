@@ -22,20 +22,21 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
-# AUTOMATIC TAGS             symbol      description         border influence
+# other tags, that can be used ☀ ⁇ ✅ ⛔ 🌦️ ‼
+# AUTOMATIC TAGS                symbol  description  border  influence
 TAG_DICT = {
-    'status_ok_tag': (chr(9989), "статус Ok", "success", 7),  # ✅
-    'status_bad_tag': (chr(9940), "статус Bad", "danger", 25),  # ⛔
-    'is_enabled_tag': (chr(9212), "включено", "success", 5),  # ⏼
-    'is_disabled_tag': (chr(9211), "выключено", "dark", 30),  # ⏻
-    'diagnosed_tag': (chr(9874), "осмотрен", "success", 3),  # ⚒
-    'have_to_be_diagnosed': (chr(8263), "пришло время осмотра", "info", 15),  # ⏰⏰⏰⏰⏰⁇
-    'need_service_tag': (chr(9997), "пришло время TO", "info", 18),  # ✍
-    'have_maintenance_tag': (chr(9730), "прошел ТО", "success", 2),  # ☂
-    'is_critical_tag': (chr(8252), "критически важен", "success", 4),  # ‼
-    'call_down_tag': (chr(9785), "есть замечания", "warning", 20),  # ☹
-    'have_to_be_repaired_tag': (chr(9888), "требует ремонта", "warning", 23),  # ⚠
-    'is_critically_broken_tag': (chr(9760), "сломано", "danger", 28),  # ☠
+    'status_ok_tag':            ("✔", "статус Ok", "success", 7),  # ✔
+    'status_bad_tag':           (chr(9940), "статус Bad", "danger", 25),  # ⛔
+    'is_enabled_tag':           ("💡", "включен", "success", 5),  # 💡
+    'is_disabled_tag':          ("🔌", "выключен", "dark", 30),  # 🔌
+    'diagnosed_tag':            (chr(9874), "осмотрен", "success", 3),  # ⚒
+    'have_to_be_diagnosed':     (chr(9200), "пришло время осмотра", "info", 15),  # ⏰
+    'need_service_tag':         (chr(9997), "пришло время TO", "info", 18),  # ✍
+    'have_maintenance_tag':     (chr(9730), "прошел ТО", "success", 2),  # ☂
+    'is_critical_tag':          (chr(9889), "критически важен", "success", 4),  # ⚡
+    'call_down_tag':            (chr(9785), "есть замечания", "warning", 20),  # ☹
+    'have_to_be_repaired_tag':  (chr(9888), "требует ремонта", "warning", 23),  # ⚠
+    'is_critically_broken_tag': (chr(9760), "сломан", "danger", 28),  # ☠
 }
 
 
@@ -79,6 +80,19 @@ class MlObjectIndexPage(Page):
         ml_objects = self.get_children().live().order_by('title')
         context['ml_objects'] = ml_objects
         return context
+
+    # colored borders for objects
+    def ml_list_alert_color(self):
+        alert = "border-success"
+        if (not self.have_to_be_repaired) or (not self.diagnosed):
+            alert = "alert-info"
+        elif self.have_to_be_repaired or self.call_down:
+            alert = "alert-warning"
+        elif self.is_critically_broken:
+            alert = "alert-danger"
+        elif not self.is_enabled:
+            alert = "alert-secondary"
+        return alert
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -274,7 +288,7 @@ class MlObjectPage(Page):
     # system working, but should be repaired
     have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
     # if critical and critically broken, then parent system broken too
-    is_critically_broken = models.BooleanField(default=False, verbose_name='авария')
+    is_critically_broken = models.BooleanField(default=False, verbose_name='сломан')
     # automatic fields
     sub_elements = models.IntegerField(default=0, verbose_name='составные части')
     broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
@@ -294,8 +308,6 @@ class MlObjectPage(Page):
         else:
             return None
 
-
-
     # colored borders for objects
     def ml_obj_border(self):
         tags = self.auto_tags.all()
@@ -307,9 +319,6 @@ class MlObjectPage(Page):
                     influence = TAG_DICT[key][3]
                     border = TAG_DICT[key][2]
         return border
-
-
-
 
     # override save method
     def save(self, *args, **kwargs):
