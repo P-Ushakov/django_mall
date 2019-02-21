@@ -48,6 +48,8 @@ class MlObjectIndexPage(Page):
     category = models.ForeignKey('mall.MlCategory', on_delete=models.SET_NULL, null=True)
     # logical block
     # is system normally operating
+    # TODO rewrite it to integer and change bages to represent cached data
+    # TODO write metod to populate cashed data on descendants update
     is_enabled = models.BooleanField(default=True, verbose_name='группа включена')
     # is critical for parent system
     is_critical = models.BooleanField(default=True, verbose_name='группа критически важна')
@@ -68,7 +70,7 @@ class MlObjectIndexPage(Page):
     # group is visible for tags. If False - group close local scope of tags
     is_visible_for_tags = models.BooleanField(default=True, verbose_name="группа видна для дочерних меток")
 
-    # automatic fields
+    # TODO dele this 2 fields automatic fields
     sub_elements = models.IntegerField(default=0, verbose_name='составные части')
     broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
     critically_broken_parts_count = models.IntegerField(default=0, verbose_name='критичных повреждений')

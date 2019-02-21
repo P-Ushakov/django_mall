@@ -15,6 +15,7 @@ def ml_tag_border(tag=None):
             button_color = color
     return button_color
 
+
 @register.simple_tag
 def ml_tag_tooltip(tag=None):
     tooltip = "ключевое слово"
@@ -37,12 +38,11 @@ def ml_tag_header(tag=None):
     return header.capitalize()
 
 
-#@register.inclusion_tag('ml_get_badges.html')(ml_get_badges)
 def ml_get_badges(id=None):
     # take page id, returns list with of all descendants tags pairs ((key1,count1),(key2,count2),...)
     if id:
         ml_object = Page.objects.get(id=id)
-        ml_descendants = ml_object.get_descendants()
+        ml_descendants = ml_object.get_descendants().live()
         unique_tags = {}
         for descendant in ml_descendants:
             if hasattr(descendant.specific,  "auto_tags"):

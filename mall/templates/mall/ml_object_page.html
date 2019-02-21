@@ -55,7 +55,7 @@
             <div class="alert border-success mb-4" role="alert">
         {% endif %}
                 {# alert #}
-                <h6><a href="{% pageurl obj %}">{{ obj.title }}</a> </h6>
+                <h6><a href="{% pageurl obj %}">{{ obj.specific.category.title }} / {{ obj.title }}</a> </h6>
                 {{ obj.specific.intro }}
                 {% ml_get_badges obj.id %}
             </div>
