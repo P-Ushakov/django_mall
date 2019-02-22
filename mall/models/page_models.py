@@ -25,18 +25,18 @@ from wagtailautocomplete.edit_handlers import AutocompletePanel
 # other tags, that can be used ☀ ⁇ ✅ ⛔ 🌦️ ‼
 # AUTOMATIC TAGS                symbol  description  border  influence
 TAG_DICT = {
-    'status_ok_tag':            ("✔", "статус Ok", "success", 7),  # ✔
-    'status_bad_tag':           (chr(9940), "статус Bad", "danger", 25),  # ⛔
-    'is_enabled_tag':           ("💡", "включен", "success", 5),  # 💡
-    'is_disabled_tag':          ("🔌", "выключен", "dark", 30),  # 🔌
-    'diagnosed_tag':            (chr(9874), "осмотрен", "success", 3),  # ⚒
-    'have_to_be_diagnosed':     (chr(9200), "пришло время осмотра", "info", 15),  # ⏰
-    'need_service_tag':         (chr(9997), "пришло время TO", "info", 18),  # ✍
-    'have_maintenance_tag':     (chr(9730), "прошел ТО", "success", 2),  # ☂
-    'is_critical_tag':          (chr(9889), "критически важен", "success", 4),  # ⚡
-    'call_down_tag':            (chr(9785), "есть замечания", "warning", 20),  # ☹
-    'have_to_be_repaired_tag':  (chr(9888), "требует ремонта", "warning", 23),  # ⚠
-    'is_critically_broken_tag': (chr(9760), "сломан", "danger", 28),  # ☠
+    'status_ok':            ("✔", "статус Ok", "success", 7),  # ✔
+    'status_bad':           (chr(9940), "статус Bad", "danger", 25),  # ⛔
+    'is_enabled':           ("💡", "включен", "success", 5),  # 💡
+    'is_disabled':          ("🔌", "выключен", "dark", 30),  # 🔌
+    'diagnosed':            (chr(9874), "осмотрен", "success", 3),  # ⚒
+    'have_to_be_diagnosed': (chr(9200), "пришло время осмотра", "info", 15),  # ⏰
+    'need_service':         (chr(9997), "пришло время TO", "info", 18),  # ✍
+    'have_maintenance':     (chr(9730), "прошел ТО", "success", 2),  # ☂
+    'is_critical':          (chr(9889), "критически важен", "success", 4),  # ⚡
+    'call_down':            (chr(9785), "есть замечания", "warning", 20),  # ☹
+    'have_to_be_repaired':  (chr(9888), "требует ремонта", "warning", 23),  # ⚠
+    'is_critically_broken': (chr(9760), "сломан", "danger", 28),  # ☠
 }
 
 
@@ -50,30 +50,31 @@ class MlObjectIndexPage(Page):
     # is system normally operating
     # TODO rewrite it to integer and change bages to represent cached data
     # TODO write metod to populate cashed data on descendants update
-    is_enabled = models.BooleanField(default=True, verbose_name='группа включена')
-    # is critical for parent system
-    is_critical = models.BooleanField(default=True, verbose_name='группа критически важна')
+    status_ok = models.IntegerField(default=0, verbose_name='статус OK')
+    status_bad = models.IntegerField(default=0, verbose_name='статус Bad')
+    is_enabled = models.IntegerField(default=0, verbose_name='включено')
+    is_disabled = models.IntegerField(default=0, verbose_name='выключено')
     # is object periodically diagnosed
-    diagnosed = models.BooleanField(default=True, verbose_name='группа осмотрена')
+    diagnosed = models.IntegerField(default=0, verbose_name='произведен осмотр')
+    have_to_be_diagnosed = models.IntegerField(default=0, verbose_name='требует осмотра')
     # have normal maintenance
-    have_maintenance = models.BooleanField(default=True, verbose_name='группа обслужена')
-    # object have cll-down to it's work
-    call_down = models.BooleanField(default=False, verbose_name='есть замечания')
+    have_maintenance = models.IntegerField(default=0, verbose_name='пройдено ТО')
+    need_service = models.IntegerField(default=0, verbose_name='требует ТО')
+    # object have call-down to it's work
+    call_down = models.IntegerField(default=0, verbose_name='есть замечания')
     # system working, but should be repaired
-    have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
+    have_to_be_repaired = models.IntegerField(default=0, verbose_name='требует ремонта')
+
+    # is critical for parent system
+    is_critical = models.IntegerField(default=0, verbose_name='критически важный элемент')
     # if critical and critically broken, then parent system broken too
-    is_critically_broken = models.BooleanField(default=False, verbose_name='группа сломана')
+    is_critically_broken = models.IntegerField(default=0, verbose_name='сломано')
     # settings fields
-    # group is critically_broken if all elements have to be repaired
-    broken_if_num_elements_broken = models.IntegerField(default=0,
-                                                        verbose_name='группа сломана если N элементов требует ремонта')
+
     # group is visible for tags. If False - group close local scope of tags
     is_visible_for_tags = models.BooleanField(default=True, verbose_name="группа видна для дочерних меток")
-
-    # TODO dele this 2 fields automatic fields
-    sub_elements = models.IntegerField(default=0, verbose_name='составные части')
-    broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
-    critically_broken_parts_count = models.IntegerField(default=0, verbose_name='критичных повреждений')
+    partial_cache_reset = models.BooleanField(default=False, verbose_name="частичный сброс кэшированных данных")
+    full_cache_reset = models.BooleanField(default=False, verbose_name="полный сброс кэшированных данных")
 
     # overriding default get_context to include only live objects, ordered by title
     def get_context(self, request, *args, **kwargs):
@@ -86,15 +87,18 @@ class MlObjectIndexPage(Page):
     # colored borders for objects
     def ml_list_alert_color(self):
         alert = "border-success"
-        if (not self.have_to_be_repaired) or (not self.diagnosed):
+        if self.need_service or self.have_to_be_diagnosed:
             alert = "alert-info"
-        elif self.have_to_be_repaired or self.call_down:
+        elif self.is_disabled:
+            alert = "alert-secondary"
+        elif self.have_to_be_repaired or self.call_down or self.status_bad:
             alert = "alert-warning"
         elif self.is_critically_broken:
             alert = "alert-danger"
-        elif not self.is_enabled:
-            alert = "alert-secondary"
+
         return alert
+
+
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -120,11 +124,6 @@ class MlObjectIndexPage(Page):
             ], classname=None),
             FieldRowPanel([
                 FieldPanel('is_critically_broken', classname="col6"),
-                FieldPanel('sub_elements', classname="col6"),
-            ], classname=None),
-            FieldRowPanel([
-                FieldPanel('broken_parts_count'),
-                FieldPanel('critically_broken_parts_count'),
             ], classname=None),
         ], heading="Состояние объекта",
             classname="collapsible collapsed"),
@@ -132,13 +131,14 @@ class MlObjectIndexPage(Page):
     ]
 
     settings_panels = Page.settings_panels + [
-        FieldPanel('broken_if_num_elements_broken'),
         FieldPanel('is_visible_for_tags'),
+        FieldPanel('partial_cache_reset'),
+        FieldPanel('full_cache_reset'),
     ]
 
     class Meta:
         verbose_name = "список объектов"
-        verbose_name_plural = "список объектов"
+        verbose_name_plural = "списоки объектов"
 
     subpage_types = ['MlObjectPage', 'MlObjectIndexPage']
 
@@ -209,6 +209,7 @@ class MlObjectTagIndexPage(Page):
         verbose_name = "ключи поиска"
         verbose_name_plural = "ключи поиска"
 
+
 # TODO: Make frontend
 class MlObjDisposerList(Page):
     pass
@@ -265,7 +266,7 @@ class MlObjectPage(Page):
                                     on_delete=models.SET_NULL,
                                     related_name='+',
                                     verbose_name="распорядитель объекта")
-    start_date = models.DateField("начало", blank=True, null=True)
+    install_date = models.DateField("дата установки", blank=True, null=True)
     status_ok = models.BooleanField("параметры в норме", default=True)
     intro = models.TextField(verbose_name='краткое описание',
                              blank=True)
@@ -291,10 +292,6 @@ class MlObjectPage(Page):
     have_to_be_repaired = models.BooleanField(default=False, verbose_name='требует ремонта')
     # if critical and critically broken, then parent system broken too
     is_critically_broken = models.BooleanField(default=False, verbose_name='сломан')
-    # automatic fields
-    sub_elements = models.IntegerField(default=0, verbose_name='составные части')
-    broken_parts_count = models.IntegerField(default=0, verbose_name='некритичных повреждений')
-    critically_broken_parts_count = models.IntegerField(default=0, verbose_name='критичных повреждений')
 
     # search block
     search_fields = Page.search_fields + [
@@ -303,6 +300,40 @@ class MlObjectPage(Page):
     ]
 
     # logical block
+    # getters and setters
+    @property
+    def status_bad(self):
+        return not self.status_ok
+
+    @status_bad.setter
+    def status_bad(self, value):
+        self.status_ok = not value
+
+    @property
+    def is_disabled(self):
+        return not self.is_enabled
+
+    @is_disabled.setter
+    def is_disabled(self, value):
+        self.is_enabled = not value
+
+    @property
+    def have_to_be_diagnosed(self):
+        return not self.diagnosed
+
+    @have_to_be_diagnosed.setter
+    def have_to_be_diagnosed(self, value):
+        self.diagnosed = not value
+
+    @property
+    def need_service(self):
+        return not self.have_maintenance
+
+    @need_service.setter
+    def need_service(self, value):
+        self.have_maintenance = not value
+
+    # FixMe
     def main_image(self):
         gallery_item = self.gallery_images.first()
         if gallery_item:
@@ -325,33 +356,20 @@ class MlObjectPage(Page):
     # override save method
     def save(self, *args, **kwargs):
 
-        crit = self.is_critically_broken
-        if crit:
+        if self.is_critically_broken:
             self.have_to_be_repaired = True
+
+        if self.have_to_be_repaired:
+            self.status_ok = False
 
         self.auto_tags.clear()
 
-        if self.status_ok:
-            self.auto_tags.add(TAG_DICT['status_ok_tag'][0])
-        else:
-            self.auto_tags.add(TAG_DICT['status_bad_tag'][0])
-        if self.diagnosed:
-            self.auto_tags.add(TAG_DICT['diagnosed_tag'][0])
-        else:
-            self.auto_tags.add(TAG_DICT['need_service_tag'][0])
-        if self.is_enabled:
-            self.auto_tags.add(TAG_DICT['is_enabled_tag'][0])
-        if self.is_critical:
-            self.auto_tags.add(TAG_DICT['is_critical_tag'][0])
-        if self.have_maintenance:
-            self.auto_tags.add(TAG_DICT['have_maintenance_tag'][0])
-        if self.call_down:
-            self.auto_tags.add(TAG_DICT['call_down_tag'][0])
-        if self.have_to_be_repaired:
-            self.auto_tags.add(TAG_DICT['have_to_be_repaired_tag'][0])
-        if self.is_critically_broken:
-            self.auto_tags.add(TAG_DICT['is_critically_broken_tag'][0])
-
+        status_args = ('status_ok', 'status_bad', 'is_enabled', 'is_disabled', 'diagnosed',
+                       'have_to_be_diagnosed', 'have_maintenance', 'need_service', 'is_critical',
+                       'call_down', 'have_to_be_repaired', 'is_critically_broken')
+        for status in status_args:
+            if getattr(self, status):
+                self.auto_tags.add(TAG_DICT[status][0])
 
         """
         if crit and is_crit:
@@ -387,7 +405,7 @@ class MlObjectPage(Page):
         MultiFieldPanel([
             AutocompletePanel('disposer_id', page_type='mall.MlObjDisposer'),
             FieldRowPanel([
-                FieldPanel('start_date'),
+                FieldPanel('install_date'),
                 FieldPanel('status_ok'),
             ], classname=None),
         ], heading="Кто расроряжается:", classname="collapsible collapsed"),
@@ -406,11 +424,6 @@ class MlObjectPage(Page):
             ], classname=None),
             FieldRowPanel([
                 FieldPanel('is_critically_broken', classname="col6"),
-                FieldPanel('sub_elements', classname="col6"),
-            ], classname=None),
-            FieldRowPanel([
-                FieldPanel('broken_parts_count'),
-                FieldPanel('critically_broken_parts_count'),
             ], classname=None),
         ], heading="Состояние объекта",
             classname="collapsible collapsed"),

@@ -1,5 +1,5 @@
 from django import template
-from mall.models import TAG_DICT
+from mall.models import TAG_DICT, MlObjectPage
 from wagtail.core.models import Page
 
 register = template.Library()
@@ -11,8 +11,13 @@ def ml_tag_border(tag=None):
     for key in TAG_DICT:
         symbol = TAG_DICT[key][0]
         color = TAG_DICT[key][2]
-        if symbol == tag.name:
-            button_color = color
+        if hasattr(tag, 'name'):
+            if symbol == tag.name:
+                button_color = color
+        else:
+            if symbol == tag:
+                button_color = color
+
     return button_color
 
 
@@ -22,8 +27,12 @@ def ml_tag_tooltip(tag=None):
     for key in TAG_DICT:
         symbol = TAG_DICT[key][0]
         dict_tooltip = TAG_DICT[key][1]
-        if symbol == tag.name:
-            tooltip = dict_tooltip
+        if hasattr(tag, 'name'):
+            if symbol == tag.name:
+                tooltip = dict_tooltip
+        else:
+            if symbol == tag:
+                tooltip = dict_tooltip
     return tooltip
 
 
@@ -38,25 +47,66 @@ def ml_tag_header(tag=None):
     return header.capitalize()
 
 
+def collect_unique_tag(page):
+    # accept Page, return dictionary of unique tags
+    unique_tags = {}
+    ml_descendants = page.get_descendants().live()
+    for descendant in ml_descendants:
+        if hasattr(descendant.specific, "auto_tags"):
+            tags = descendant.specific.auto_tags.all()
+            for tag in tags:
+                if tag.name in unique_tags:
+                    unique_tags[tag.name] += 1
+                else:
+                    unique_tags[tag.name] = 1
+    return unique_tags
+
+
+def collect_status(page, *args, **kwargs):
+    descendants = page.get_descendants().exact_type(MlObjectPage).live()
+    statuses = {}
+    for descendant in descendants:
+        for item in args:
+            if hasattr(descendant.specific, item):
+                if item in statuses:
+                    statuses[item] += int(getattr(descendant.specific, item))
+                else:
+                    statuses[item] = int(getattr(descendant.specific, item))
+    for item in args:
+        if hasattr(page.specific, item):
+            setattr(page.specific, item, statuses[item])
+    super(Page, page.specific).save()
+    return statuses
+
+
 def ml_get_badges(id=None):
     # take page id, returns list with of all descendants tags pairs ((key1,count1),(key2,count2),...)
     if id:
         ml_object = Page.objects.get(id=id)
-        ml_descendants = ml_object.get_descendants().live()
+
+        unique_tag_list = []
         unique_tags = {}
-        for descendant in ml_descendants:
-            if hasattr(descendant.specific,  "auto_tags"):
-                tags = descendant.specific.auto_tags.all()
-                for tag in tags:
-                    if tag.name in unique_tags:
-                        unique_tags[tag.name] += 1
-                    else:
-                        unique_tags[tag.name] = 1
+        status_args = ('status_ok', 'status_bad', 'is_enabled', 'is_disabled', 'diagnosed',
+                       'have_to_be_diagnosed', 'need_service', 'have_maintenance', 'is_critical',
+                       'call_down', 'have_to_be_repaired', 'is_critically_broken')
+        statuses = collect_status(ml_object, *status_args)
+
+        for key, value in statuses.items():
+            if (key in TAG_DICT) and value > 0:
+                unique_tags[TAG_DICT[key][0]] = value
+
+
+        # update_cashed_ml_object_page_tags = True
+        # partial cache reset
+        # ml_descendants = ml_object.get_descendants().exact_type(MlObjectPage).live()
+        # full cache reset
+
         if unique_tags:
             unique_tag_list = []
             for pair in unique_tags.items():
                 unique_tag_list.append(pair)
-            return {'unique_tag_list': unique_tag_list}
+
+        return {'unique_tag_list': unique_tag_list}
 
 
 register.inclusion_tag('mall/ml_get_badges.html')(ml_get_badges)

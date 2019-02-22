@@ -1,6 +1,7 @@
-{% for key, value in unique_tag_list %}
-    <button type="button" class="btn btn-primary">
-      {{ key }} <span class="badge badge-light">{{ value }}</span>
-      <span class="sr-only">unread messages</span>
-    </button>
-{% endfor %}
+{% load ml_tags %}
+    {% for key, value in unique_tag_list %}
+        <button type="button" class="btn mb-1 btn-{% ml_tag_border key %}">
+          {{ key }} <span class="badge badge-light">{{ value }}</span>
+          <span class="sr-only">unread messages</span>
+        </button>
+    {% endfor %}
