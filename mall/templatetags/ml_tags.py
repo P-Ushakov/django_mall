@@ -47,6 +47,7 @@ def ml_tag_header(tag=None):
     return header.capitalize()
 
 
+# FixMe deprecated
 def collect_unique_tag(page):
     # accept Page, return dictionary of unique tags
     unique_tags = {}
@@ -106,7 +107,7 @@ def ml_get_badges(id=None):
             for pair in unique_tags.items():
                 unique_tag_list.append(pair)
 
-        return {'unique_tag_list': unique_tag_list}
+        return {'unique_tag_list': unique_tag_list, 'id': id}
 
 
 register.inclusion_tag('mall/ml_get_badges.html')(ml_get_badges)
