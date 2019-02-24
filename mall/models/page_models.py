@@ -28,7 +28,7 @@ TAG_DICT = {
     'status_ok':            ("✔", "статус Ok", "success", 7),  # ✔
     'status_bad':           (chr(9940), "статус Bad", "danger", 25),  # ⛔
     'is_enabled':           ("💡", "включен", "success", 5),  # 💡
-    'is_disabled':          ("🔌", "выключен", "dark", 30),  # 🔌
+    'is_disabled':          ("🔌", "выключен", "dark", 21),  # 🔌
     'diagnosed':            (chr(9874), "осмотрен", "success", 3),  # ⚒
     'have_to_be_diagnosed': (chr(9200), "пришло время осмотра", "info", 15),  # ⏰
     'need_service':         (chr(9997), "пришло время TO", "info", 18),  # ✍
@@ -45,7 +45,11 @@ class MlObjectIndexPage(Page):
     intro = models.TextField(verbose_name='краткое описание',
                              blank=True)
     # ToDo: rewrite categories to "orderable" model
-    category = models.ForeignKey('mall.MlCategory', on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey('mall.MlCategory',
+                                 on_delete=models.SET_NULL,
+                                 null=True,
+                                 blank=True,
+                                 related_name='+')
     # logical block
     # is system normally operating
     # TODO rewrite it to integer and change bages to represent cached data
@@ -108,6 +112,7 @@ class MlObjectIndexPage(Page):
         FieldPanel('intro', classname="full"),
         # Default field SnippestChooserPanel is changed to third party AutocompletePanel
         # SnippetChooserPanel('category'),
+        # PageChooserPanel('category'),
         AutocompletePanel('category', page_type='mall.MlCategory'),
         MultiFieldPanel([
             FieldRowPanel([

@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80919050-ad6e-4985-b1ac-9722d8dfd035" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mall/models/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/models/page_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mall/models/page_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/templatetags/ml_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templatetags/ml_tags.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,6 +41,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ml_signals.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mall/ml_signals.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="702">
+              <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ml_get_badges.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,11 +62,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ml_tags.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mall/models/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#87#115#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ml_tags.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/templatetags/ml_tags.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="49" column="7" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+            <state relative-caret-position="900">
+              <caret line="79" column="7" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -70,11 +92,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="page_models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="page_models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="190" column="32" selection-start-line="190" selection-start-column="32" selection-end-line="190" selection-end-column="32" />
+            <state relative-caret-position="180">
+              <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_handlers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/wagtail/snippets/edit_handlers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_handlers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/wagtail/admin/edit_handlers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="570" column="22" selection-start-line="570" selection-start-column="6" selection-end-line="570" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="widgets.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/wagtail/snippets/widgets.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -131,14 +180,14 @@
         <option value="$PROJECT_DIR$/mall/templatetags/__init__.py" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_tag_index_page.html" />
         <option value="$PROJECT_DIR$/mall/page_models.py" />
-        <option value="$PROJECT_DIR$/mall/models/models.py" />
         <option value="$PROJECT_DIR$/mall/models/__init__.py" />
         <option value="$PROJECT_DIR$/mall/templatetags/ml_get_badges.html" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_index_page.html" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" />
-        <option value="$PROJECT_DIR$/mall/models/page_models.py" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" />
         <option value="$PROJECT_DIR$/mall/templatetags/ml_tags.py" />
+        <option value="$PROJECT_DIR$/mall/models/models.py" />
+        <option value="$PROJECT_DIR$/mall/models/page_models.py" />
       </list>
     </option>
   </component>
@@ -183,12 +232,6 @@
               <item name="django_mall" type="462c0819:PsiDirectoryNode" />
               <item name="mall" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="mall" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -291,9 +334,9 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49676898" visible="true" weight="0.24615385" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.14923076" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.20840065" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49676898" visible="true" weight="0.14" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.35384616" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20840065" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.16288492" />
       <window_info anchor="right" id="SciView" order="4" weight="0.28119937" />
@@ -361,15 +404,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/home/migrations/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/static/js/django_mall.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/static/css/django_mall.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/mall/migrations/0016_auto_20190207_2236.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -508,9 +542,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/mall/page_models.py" />
-    <entry file="file://$PROJECT_DIR$/mall/models/models.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_obj_disposer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -532,9 +563,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_tag_index_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mall/templatetags/ml_tags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="79" column="7" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mall/ml_signals.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
+        <state relative-caret-position="702">
           <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
@@ -556,24 +601,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/wagtail/snippets/widgets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/wagtail/snippets/edit_handlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/wagtail/admin/edit_handlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="570" column="22" selection-start-line="570" selection-start-column="6" selection-end-line="570" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mall/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#87#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="190" column="32" selection-start-line="190" selection-start-column="32" selection-end-line="190" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_tag_index_page.html">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mall/templatetags/ml_tags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="49" column="7" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+          <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
         </state>
       </provider>
     </entry>

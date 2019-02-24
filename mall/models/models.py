@@ -4,12 +4,13 @@
 from django.db import models
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.snippets.models import register_snippet
+from wagtail.core.models import Orderable
 
 
 # Create your models here.
 # Группировка объектов по свойствам (помещения, вентустановки, лифты, ...)
 @register_snippet
-class MlCategory(models.Model):
+class MlCategory(Orderable, models.Model):
     title = models.CharField(max_length=255,
                              verbose_name="название")
     description = models.TextField(blank=True,
