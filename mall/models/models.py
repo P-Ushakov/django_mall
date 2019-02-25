@@ -20,6 +20,10 @@ class MlCategory(Orderable, models.Model):
         FieldPanel('description', classname='full')
     ]
 
+    @classmethod
+    def autocomplete_create(kls:'mall.MlCategory', value: str):
+        return kls.objects.create(title=value)
+
     def __str__(self):
         return self.title
 

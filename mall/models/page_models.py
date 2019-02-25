@@ -29,10 +29,10 @@ TAG_DICT = {
     'status_bad':           (chr(9940), "статус Bad", "danger", 25),  # ⛔
     'is_enabled':           ("💡", "включен", "success", 5),  # 💡
     'is_disabled':          ("🔌", "выключен", "dark", 21),  # 🔌
-    'diagnosed':            (chr(9874), "осмотрен", "success", 3),  # ⚒
+    'diagnosed':            (chr(9730), "осмотрен", "success", 3),   # ☂
     'have_to_be_diagnosed': (chr(9200), "пришло время осмотра", "info", 15),  # ⏰
     'need_service':         (chr(9997), "пришло время TO", "info", 18),  # ✍
-    'have_maintenance':     (chr(9730), "прошел ТО", "success", 2),  # ☂
+    'have_maintenance':     (chr(9874), "прошел ТО", "success", 2),  # ⚒
     'is_critical':          (chr(9889), "критически важен", "success", 4),  # ⚡
     'call_down':            (chr(9785), "есть замечания", "warning", 20),  # ☹
     'have_to_be_repaired':  (chr(9888), "требует ремонта", "warning", 23),  # ⚠
@@ -91,18 +91,17 @@ class MlObjectIndexPage(Page):
     # colored borders for objects
     def ml_list_alert_color(self):
         alert = "border-success"
-        if self.need_service or self.have_to_be_diagnosed:
-            alert = "alert-info"
-        elif self.is_disabled:
-            alert = "alert-secondary"
-        elif self.have_to_be_repaired or self.call_down or self.status_bad:
-            alert = "alert-warning"
-        elif self.is_critically_broken:
-            alert = "alert-danger"
-
+        influence = 0
+        for key, value in TAG_DICT.items():
+            if hasattr(self, key):
+                if getattr(self, key):
+                    if influence < value[3]:
+                        influence = value[3]
+                        if key in ['status_ok', 'is_enabled', 'diagnosed', 'have_maintenance']:
+                            alert = "border-" + value[2]
+                        else:
+                            alert = "alert-" + value[2]
         return alert
-
-
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
