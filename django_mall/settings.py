@@ -151,6 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # Wagtail block ***********************************************
 STATICFILES_FINDERS = [
@@ -158,12 +159,13 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),]
+    os.path.join(PROJECT_DIR, 'static'),
+    os.path.join(PROJECT_DIR, 'django_mall', 'django_mall', 'static'), ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+
 
 '''
 ADMINS = [

@@ -26,7 +26,7 @@ from wagtailautocomplete.edit_handlers import AutocompletePanel
 # AUTOMATIC TAGS                symbol  description  border  influence
 TAG_DICT = {
     'status_ok':            ("✔", "статус Ok", "success", 7),  # ✔
-    'status_bad':           (chr(9940), "статус Bad", "danger", 25),  # ⛔
+    'status_bad':           (chr(9940), "есть сбои", "danger", 25),  # ⛔
     'is_enabled':           ("💡", "включен", "success", 5),  # 💡
     'is_disabled':          ("🔌", "выключен", "dark", 21),  # 🔌
     'diagnosed':            (chr(9730), "осмотрен", "success", 3),   # ☂

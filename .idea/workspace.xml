@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80919050-ad6e-4985-b1ac-9722d8dfd035" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/django_mall/static/js/jquery-3.3.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_mall/static/js/popper.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_mall/static/css/bulma.min.css.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_mall/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/models/page_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mall/models/page_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +36,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4968">
-              <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
+            <state relative-caret-position="216">
+              <caret line="29" column="41" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="41" />
+              <folding>
+                <element signature="e#63#91#0" expanded="true" />
+                <element signature="e#1998#6771#0" />
+                <element signature="e#6831#7059#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,17 +53,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+            <state relative-caret-position="972">
+              <caret line="36" column="261" selection-start-line="36" selection-start-column="261" selection-end-line="36" selection-end-column="261" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/django_mall/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="1566">
+              <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -95,7 +103,6 @@
         <option value="$PROJECT_DIR$/mall/admin.py" />
         <option value="$PROJECT_DIR$/mall/migrations/0016_auto_20190207_2236.py" />
         <option value="$PROJECT_DIR$/home/models.py" />
-        <option value="$PROJECT_DIR$/django_mall/settings.py" />
         <option value="$PROJECT_DIR$/home/templates/home/home_page.html" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_obj_disposer_list.py" />
@@ -116,14 +123,15 @@
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_index_page.html" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" />
         <option value="$PROJECT_DIR$/mall/templatetags/ml_tags.py" />
-        <option value="$PROJECT_DIR$/mall/models/page_models.py" />
         <option value="$PROJECT_DIR$/mall/models/models.py" />
-        <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" />
+        <option value="$PROJECT_DIR$/django_mall/settings.py" />
         <option value="$PROJECT_DIR$/django_mall/templates/base.html" />
+        <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" />
+        <option value="$PROJECT_DIR$/mall/models/page_models.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1496" />
     <option name="y" value="108" />
     <option name="width" value="1936" />
@@ -137,7 +145,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -153,37 +160,6 @@
             <path>
               <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
               <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
               <item name="mall" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -195,19 +171,13 @@
             <path>
               <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
               <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="mall" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="mall" type="462c0819:PsiDirectoryNode" />
-              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -220,19 +190,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\django_mall\static\js" />
+      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall\templates\mall" />
+      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall\templatetags" />
+      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall\models" />
+      <recent name="$PROJECT_DIR$/mall/templatetags" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/django_mall/static/css" />
       <recent name="$PROJECT_DIR$/django_mall/static/js" />
       <recent name="$PROJECT_DIR$/django_mall/templates" />
       <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\django_mall\templates" />
       <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\django_mall" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall\templates\mall" />
-      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall\templatetags" />
-      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall\models" />
-      <recent name="$PROJECT_DIR$/mall/templatetags" />
-      <recent name="C:\Users\admin\PycharmProjects\myproject\django_mall\mall" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -292,23 +262,23 @@
       <workItem from="1549447012905" duration="14362000" />
       <workItem from="1549532085071" duration="18517000" />
       <workItem from="1551172376067" duration="676000" />
-      <workItem from="1551190681244" duration="4164000" />
+      <workItem from="1551190681244" duration="4274000" />
+      <workItem from="1551258512274" duration="10832000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="212130000" />
+    <option name="totallyTimeSpent" value="223072000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14232409" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12793177" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49756888" visible="true" weight="0.19068256" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.27193934" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49756888" visible="true" weight="0.17984831" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.1928494" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -317,7 +287,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5024311" side_tool="true" weight="0.5807504" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.21018419" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.17334779" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="14" weight="0.32952693" />
@@ -356,8 +326,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../venv/Lib/site-packages/django/db/models/manager.py" />
-    <entry file="file://$PROJECT_DIR$/../venv/Lib/importlib/__init__.py" />
     <entry file="file://$PROJECT_DIR$/../venv/Lib/site-packages/wagtailautocomplete/views.py" />
     <entry file="file://$PROJECT_DIR$/django_mall/templates/base.html.bak" />
     <entry file="file://$PROJECT_DIR$/django_mall/static/js/fontawesome_all.js">
@@ -376,13 +344,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/django/template/response.py" />
-    <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -450,13 +411,6 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -551,24 +505,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
+    <entry file="file://$PROJECT_DIR$/home/static/css/welcome_page.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4968">
-          <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
+        <state relative-caret-position="-648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="161" column="31" selection-start-line="161" selection-start-column="31" selection-end-line="161" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
+    <entry file="file://$PROJECT_DIR$/django_mall/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="628">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/django_mall/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="1566">
+          <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="36" column="261" selection-start-line="36" selection-start-column="261" selection-end-line="36" selection-end-column="261" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init-data.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret column="1025" selection-start-column="1025" selection-end-column="1025" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="29" column="41" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="41" />
+          <folding>
+            <element signature="e#63#91#0" expanded="true" />
+            <element signature="e#1998#6771#0" />
+            <element signature="e#6831#7059#0" />
+          </folding>
         </state>
       </provider>
     </entry>

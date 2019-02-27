@@ -28,36 +28,20 @@
             </div>
         {% endif %}
 
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <button type="button" class="btn btn-secondary">1</button>
-          <button type="button" class="btn btn-secondary">2</button>
-
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                  <a class="dropdown-item" href="#">Dropdown link</a>
-                  <a class="dropdown-item" href="#">Dropdown link</a>
-                </div>
-            </div>
-        </div>
-
-
         <!-- Automatic tags -->
         {% if page.auto_tags.all.count %}
             <div class="tags">
                 <h6>состояние:</h6>
                 {% for tag in page.auto_tags.all %}
                      <div class="btn-group" role="group">
-                        <button id="btnGroup{{ tag.name }}" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button id="btnGroup{{ tag.name }}" type="button" class="btn alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{% ml_tag_tooltip tag %}">
                             {{ tag.name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroup{{ tag.name }}">
-                            <a class="dropdown-item" href="#">Dropdown link</a>
                             <a class="dropdown-item" href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
-                                <button class="alert alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %}" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{{ tag }}</button>
+                                <button class="alert alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %}" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{% ml_tag_tooltip tag %} ({{ tag }})</button>
                             </a>
+                            <a class="dropdown-item" href="#">Dropdown link</a>
                         </div>
                      </div>
                 {% endfor %}
