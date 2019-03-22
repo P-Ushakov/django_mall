@@ -1,7 +1,7 @@
-{% load ml_tags wagtailcore_tags %}
+{% load ml_obj_tags wagtailcore_tags %}
     {% for key, value in unique_tag_list %}
         <a href="{% slugurl 'tags' %}?tag={{ key }}&id={{ id }}">
-            <button type="button" class="btn mb-1 alert-{% ml_tag_border key %} border-{% ml_tag_border key %}" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip key %}">
+            <button type="button" class="btn mb-1 alert-{% ml_obj_tag_border key %} border-{% ml_obj_tag_border key %}" data-toggle="tooltip" data-placement="top" title="{% ml_obj_tag_tooltip key %}">
               {{ key }} <span class="badge badge-light">{{ value }}</span>
             </button>
         </a>

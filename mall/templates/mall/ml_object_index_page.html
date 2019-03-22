@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags ml_tags %}
+{% load wagtailcore_tags wagtailimages_tags ml_obj_tags %}
 
 {% block body_class %}template-mlobjectindexpage{% endblock %}
 
@@ -22,7 +22,7 @@
                         <div class="tags">
                         {% for tag in obj.auto_tags.all %}
                             <a href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ obj.id }}">
-                                <button type="button" class="btn alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %}" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{{ tag }}</button>
+                                <button type="button" class="btn alert-{% ml_obj_tag_border tag %} border-{% ml_obj_tag_border tag %}" data-toggle="tooltip" data-placement="top" title="{% ml_obj_tag_tooltip tag %}">{{ tag }}</button>
                             </a>
                         {% endfor %}
                         </div>

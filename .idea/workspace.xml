@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80919050-ad6e-4985-b1ac-9722d8dfd035" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/django_mall/static/js/jquery-3.3.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/django_mall/static/js/popper.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_mall/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_mall/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/models/page_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mall/models/page_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_object_index_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_object_index_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_object_tag_index_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_object_tag_index_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/templatetags/ml_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templatetags/ml_obj_tags.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,25 +37,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
-              <caret line="29" column="41" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="41" />
+              <caret line="315" column="89" selection-start-line="315" selection-start-column="89" selection-end-line="315" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mall/templatetags/ml_obj_tags.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3078">
+              <caret line="114" selection-start-line="114" selection-end-line="114" />
               <folding>
-                <element signature="e#63#91#0" expanded="true" />
-                <element signature="e#1998#6771#0" />
-                <element signature="e#6831#7059#0" />
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mall/models/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+              <folding>
+                <element signature="e#87#115#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
-              <caret line="36" column="261" selection-start-line="36" selection-start-column="261" selection-end-line="36" selection-end-column="261" />
+            <state relative-caret-position="270">
+              <caret line="46" column="80" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -62,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/django_mall/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1566">
-              <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+            <state relative-caret-position="1539">
+              <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -122,20 +142,21 @@
         <option value="$PROJECT_DIR$/mall/templatetags/ml_get_badges.html" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_index_page.html" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_get_badges.html" />
-        <option value="$PROJECT_DIR$/mall/templatetags/ml_tags.py" />
         <option value="$PROJECT_DIR$/mall/models/models.py" />
         <option value="$PROJECT_DIR$/django_mall/settings.py" />
         <option value="$PROJECT_DIR$/django_mall/templates/base.html" />
-        <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" />
+        <option value="$PROJECT_DIR$/mall/templatetags/ml_tags.py" />
+        <option value="$PROJECT_DIR$/mall/templatetags/ml_obj_tags.py" />
         <option value="$PROJECT_DIR$/mall/models/page_models.py" />
+        <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1496" />
-    <option name="y" value="108" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="1358" />
+    <option name="y" value="-8" />
+    <option name="width" value="1336" />
+    <option name="height" value="742" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -155,11 +176,6 @@
             <path>
               <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
               <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
               <item name="mall" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -171,7 +187,21 @@
             <path>
               <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
               <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="mall" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
+              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
+              <item name="mall" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="mall" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
+              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
+              <item name="mall" type="462c0819:PsiDirectoryNode" />
+              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -263,22 +293,27 @@
       <workItem from="1549532085071" duration="18517000" />
       <workItem from="1551172376067" duration="676000" />
       <workItem from="1551190681244" duration="4274000" />
-      <workItem from="1551258512274" duration="10832000" />
+      <workItem from="1551258512274" duration="11305000" />
+      <workItem from="1551367647259" duration="2737000" />
+      <workItem from="1552574275953" duration="1367000" />
+      <workItem from="1552896826199" duration="1983000" />
+      <workItem from="1553243224278" duration="10441000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223072000" />
+    <option name="totallyTimeSpent" value="240073000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12793177" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12953092" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.27193934" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49756888" visible="true" weight="0.17984831" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.100758396" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49756888" visible="true" weight="0.24702059" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.1928494" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -454,16 +489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mall/templatetags/ml_tags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="91" column="82" selection-start-line="91" selection-start-column="82" selection-end-line="91" selection-end-column="82" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mall/ml_signals.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -495,16 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mall/models/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-          <folding>
-            <element signature="e#87#115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home/static/css/welcome_page.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-648" />
@@ -524,36 +539,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/init-data.json" />
+    <entry file="file://$PROJECT_DIR$/mall/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+          <folding>
+            <element signature="e#87#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/django_mall/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+        <state relative-caret-position="1539">
+          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
+    <entry file="file://$PROJECT_DIR$/mall/templatetags/ml_obj_tags.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="36" column="261" selection-start-line="36" selection-start-column="261" selection-end-line="36" selection-end-column="261" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init-data.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret column="1025" selection-start-column="1025" selection-end-column="1025" />
+        <state relative-caret-position="3078">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mall/models/page_models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="29" column="41" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="41" />
-          <folding>
-            <element signature="e#63#91#0" expanded="true" />
-            <element signature="e#1998#6771#0" />
-            <element signature="e#6831#7059#0" />
-          </folding>
+          <caret line="315" column="89" selection-start-line="315" selection-start-column="89" selection-end-line="315" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="46" column="80" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="80" />
         </state>
       </provider>
     </entry>

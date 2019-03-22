@@ -24,7 +24,7 @@ from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 # other tags, that can be used ☀ ⁇ ✅ ⛔ 🌦️ ‼
 # AUTOMATIC TAGS                symbol  description  border  influence
-TAG_DICT = {
+obj_tag_dict = {
     'status_ok':            ("✔", "статус Ok", "success", 7),  # ✔
     'status_bad':           (chr(9940), "есть сбои", "danger", 25),  # ⛔
     'is_enabled':           ("💡", "включен", "success", 5),  # 💡
@@ -92,7 +92,7 @@ class MlObjectIndexPage(Page):
     def ml_list_alert_color(self):
         alert = "border-success"
         influence = 0
-        for key, value in TAG_DICT.items():
+        for key, value in obj_tag_dict.items():
             if hasattr(self, key):
                 if getattr(self, key):
                     if influence < value[3]:
@@ -171,6 +171,10 @@ class MlObjectAutoTag(TaggedItemBase):
     class Meta:
         verbose_name = "состояние"
         verbose_name_plural = "состояние"
+
+
+class MlObjectAutoTagMenu(models.Model):
+    pass
 
 
 # TODO: Make frontend # List of tags
@@ -305,6 +309,40 @@ class MlObjectPage(Page):
     ]
 
     # logical block
+    #    status                  symbol       description        alert      influence
+    tag_dict = {
+       'status_ok':             ("✔",       "статус Ok",        "success",  7,    # ✔
+                                 # menu item (function name)  item description         influence
+                                 {"status_ok_to_bad": ("изменить статус на 'есть сбои'", 10,),
+                                  }
+                                 ),
+       'status_bad':            (chr(9940), "есть сбои",        "danger",   25,    # ⛔
+                                 {"status_bad_to_ok": ("изменить статус на 'ОК'", 10,),
+                                  }
+                                 ),
+       'is_enabled':            ("💡",       "включен",          "success",  5,     # 💡
+                                 {"do_disable": ("выключить", 10,), }
+                                 ),
+       'is_disabled':           ("🔌",       "выключен",         "dark",    21,      # 🔌
+                                 {"do_enable": ("включить", 10,),
+                                  }
+                                 ),
+       'diagnosed':             (chr(9730),  "осмотрен",        "success",  3),    # ☂
+       'have_to_be_diagnosed':  (chr(9200),  "пришло время осмотра", "info", 15,   # ⏰
+                                 {"do_diagnose": ("выполнить осмотр", 10,),
+                                  }
+                                 ),
+       'need_service':          (chr(9997),  "пришло время TO", "info",     18,   # ✍
+                                 {"do_service": ("выполнить ТО", 10,),
+                                  }
+                                 ),
+       'have_maintenance':      (chr(9874),  "прошел ТО",       "success",   2),  # ⚒
+       'is_critical':           (chr(9889),  "критически важен", "success",  4),  # ⚡
+       'call_down':             (chr(9785),  "есть замечания",  "warning",  20),  # ☹
+       'have_to_be_repaired':   (chr(9888),  "требует ремонта", "warning",  23),  # ⚠
+       'is_critically_broken':  (chr(9760),  "сломан",          "danger",   28),  # ☠
+    }
+
     # getters and setters
     @property
     def status_bad(self):
@@ -338,6 +376,26 @@ class MlObjectPage(Page):
     def need_service(self, value):
         self.have_maintenance = not value
 
+    # functions from menu items
+    def status_ok_to_bad(self):
+        pass
+
+    def status_bad_to_ok(self):
+        pass
+
+    def do_disable(self):
+        self.is_enabled = False
+
+    def do_enable(self):
+        self.is_enabled = True
+
+    def do_diagnose(self):
+        pass
+
+    def do_service(self):
+        pass
+
+
     # FixMe
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -352,10 +410,10 @@ class MlObjectPage(Page):
         border = "success"
         influence = 0
         for tag in tags:
-            for key in TAG_DICT:
-                if TAG_DICT[key][0] == tag.name and influence < TAG_DICT[key][3]:
-                    influence = TAG_DICT[key][3]
-                    border = TAG_DICT[key][2]
+            for key in self.tag_dict:
+                if self.tag_dict[key][0] == tag.name and influence < self.tag_dict[key][3]:
+                    influence = self.tag_dict[key][3]
+                    border = self.tag_dict[key][2]
         return border
 
     # override save method
@@ -374,7 +432,7 @@ class MlObjectPage(Page):
                        'call_down', 'have_to_be_repaired', 'is_critically_broken')
         for status in status_args:
             if getattr(self, status):
-                self.auto_tags.add(TAG_DICT[status][0])
+                self.auto_tags.add(obj_tag_dict[status][0])
 
         """
         if crit and is_crit:

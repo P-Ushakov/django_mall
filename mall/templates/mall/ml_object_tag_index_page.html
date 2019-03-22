@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags ml_tags %}
+{% load wagtailcore_tags ml_obj_tags %}
 
 {% block content %}
     {% if request.GET.tag|length %}
         <div class="alert border-success">
-            <h5>{% ml_tag_header request.GET.tag %} ({{ request.GET.tag }})</h5>
+            <h5>{% ml_obj_tag_header request.GET.tag %} ({{ request.GET.tag }})</h5>
         </div>
     {% endif %}
 

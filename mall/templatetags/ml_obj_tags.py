@@ -1,16 +1,16 @@
 from django import template
-from mall.models import TAG_DICT, MlObjectPage
+from mall.models import MlObjectPage
 from wagtail.core.models import Page
 
 register = template.Library()
 
 
 @register.simple_tag
-def ml_tag_border(tag=None):
+def ml_obj_tag_border(tag=None):
     button_color = "success"
-    for key in TAG_DICT:
-        symbol = TAG_DICT[key][0]
-        color = TAG_DICT[key][2]
+    for key in MlObjectPage.tag_dict:
+        symbol = MlObjectPage.tag_dict[key][0]
+        color = MlObjectPage.tag_dict[key][2]
         if hasattr(tag, 'name'):
             if symbol == tag.name:
                 button_color = color
@@ -22,11 +22,11 @@ def ml_tag_border(tag=None):
 
 
 @register.simple_tag
-def ml_tag_tooltip(tag=None):
+def ml_obj_tag_tooltip(tag=None):
     tooltip = "ключевое слово"
-    for key in TAG_DICT:
-        symbol = TAG_DICT[key][0]
-        dict_tooltip = TAG_DICT[key][1]
+    for key in MlObjectPage.tag_dict:
+        symbol = MlObjectPage.tag_dict[key][0]
+        dict_tooltip = MlObjectPage.tag_dict[key][1]
         if hasattr(tag, 'name'):
             if symbol == tag.name:
                 tooltip = dict_tooltip
@@ -37,11 +37,11 @@ def ml_tag_tooltip(tag=None):
 
 
 @register.simple_tag
-def ml_tag_header(tag=None):
+def ml_obj_tag_header(tag=None):
     header = "ключевое слово"
-    for key in TAG_DICT:
-        symbol = TAG_DICT[key][0]
-        dict_tooltip = TAG_DICT[key][1]
+    for key in MlObjectPage.tag_dict:
+        symbol = MlObjectPage.tag_dict[key][0]
+        dict_tooltip = MlObjectPage.tag_dict[key][1]
         if symbol == tag:
             header = dict_tooltip
     return header.capitalize()
@@ -63,7 +63,7 @@ def collect_unique_tag(page):
     return unique_tags
 
 
-def collect_status(page, *args, **kwargs):
+def ml_obj_collect_status(page, *args, **kwargs):
     descendants = page.get_descendants().exact_type(MlObjectPage).live()
     statuses = {}
     for descendant in descendants:
@@ -80,7 +80,7 @@ def collect_status(page, *args, **kwargs):
     return statuses
 
 
-def ml_get_badges(id=None):
+def ml_obj_get_badges(id=None):
     # take page id, returns list with of all descendants tags pairs ((key1,count1),(key2,count2),...)
     if id:
         ml_object = Page.objects.get(id=id)
@@ -90,11 +90,11 @@ def ml_get_badges(id=None):
         status_args = ('status_ok', 'status_bad', 'is_enabled', 'is_disabled', 'diagnosed',
                        'have_to_be_diagnosed', 'need_service', 'have_maintenance', 'is_critical',
                        'call_down', 'have_to_be_repaired', 'is_critically_broken')
-        statuses = collect_status(ml_object, *status_args)
+        statuses = ml_obj_collect_status(ml_object, *status_args)
 
         for key, value in statuses.items():
-            if (key in TAG_DICT) and value > 0:
-                unique_tags[TAG_DICT[key][0]] = value
+            if (key in MlObjectPage.tag_dict) and value > 0:
+                unique_tags[MlObjectPage.tag_dict[key][0]] = value
 
 
         # update_cashed_ml_object_page_tags = True
@@ -110,5 +110,5 @@ def ml_get_badges(id=None):
         return {'unique_tag_list': unique_tag_list, 'id': id}
 
 
-register.inclusion_tag('mall/ml_get_badges.html')(ml_get_badges)
+register.inclusion_tag('mall/ml_get_badges.html')(ml_obj_get_badges)
 

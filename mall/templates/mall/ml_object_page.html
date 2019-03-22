@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags ml_tags %}
+{% load wagtailcore_tags wagtailimages_tags ml_obj_tags %}
 
 
 {% block body_class %}template-mlobjectpage{% endblock %}
@@ -22,7 +22,7 @@
                     {% endwith %}
                     {% endcomment %}
                     <a href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
-                        <button class="alert border-success" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{{ tag }}</button>
+                        <button class="alert border-success" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_obj_tag_tooltip tag %}">{{ tag }}</button>
                     </a>
                 {% endfor %}
             </div>
@@ -34,13 +34,21 @@
                 <h6>состояние:</h6>
                 {% for tag in page.auto_tags.all %}
                      <div class="btn-group" role="group">
-                        <button id="btnGroup{{ tag.name }}" type="button" class="btn alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{% ml_tag_tooltip tag %}">
+                        <button id="btnGroup{{ tag.name }}" type="button" class="btn alert-{% ml_obj_tag_border tag %} border-{% ml_obj_tag_border tag %} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{% ml_obj_tag_tooltip tag %}">
                             {{ tag.name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroup{{ tag.name }}">
                             <a class="dropdown-item" href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
-                                <button class="alert alert-{% ml_tag_border tag %} border-{% ml_tag_border tag %}" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_tag_tooltip tag %}">{% ml_tag_tooltip tag %} ({{ tag }})</button>
+                                <button class="alert alert-{% ml_obj_tag_border tag %} border-{% ml_obj_tag_border tag %}" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_obj_tag_tooltip tag %}">{% ml_obj_tag_tooltip tag %} ({{ tag }})</button>
                             </a>
+                            <a class="dropdown-item">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit" title="enable">Включить</button>
+                                    <input type="hidden" name="func_name" value="do_enable">
+                                </form>
+                            </a>
+
                             <a class="dropdown-item" href="#">Dropdown link</a>
                         </div>
                      </div>
@@ -64,7 +72,7 @@
                 {# alert #}
                 <h6><a href="{% pageurl obj %}">{{ obj.specific.category.title }} / {{ obj.title }}</a> </h6>
                 {{ obj.specific.intro }}
-                {% ml_get_badges obj.id %}
+                {% ml_obj_get_badges obj.id %}
             </div>
     {% endfor %}
     </div>
