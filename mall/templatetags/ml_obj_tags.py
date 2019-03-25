@@ -112,3 +112,7 @@ def ml_obj_get_badges(id=None):
 
 register.inclusion_tag('mall/ml_get_badges.html')(ml_obj_get_badges)
 
+
+# FixMe
+def ml_get_buttons(tags=None, tag_dict=None):
+    pass

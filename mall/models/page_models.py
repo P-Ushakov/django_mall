@@ -385,9 +385,11 @@ class MlObjectPage(Page):
 
     def do_disable(self):
         self.is_enabled = False
+        self.save()
 
     def do_enable(self):
         self.is_enabled = True
+        self.save()
 
     def do_diagnose(self):
         pass
@@ -415,6 +417,16 @@ class MlObjectPage(Page):
                     influence = self.tag_dict[key][3]
                     border = self.tag_dict[key][2]
         return border
+
+    # override get_context method
+    def get_context(self, request, *args, **kwargs):
+        func_name = request.POST.get('func_name')
+        if func_name:
+            func = getattr(self, func_name)
+            func()
+        context = super().get_context(request)
+        return context
+
 
     # override save method
     def save(self, *args, **kwargs):

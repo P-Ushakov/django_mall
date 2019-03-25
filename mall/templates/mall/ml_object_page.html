@@ -38,9 +38,12 @@
                             {{ tag.name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroup{{ tag.name }}">
+                            {% comment %}
                             <a class="dropdown-item" href="{% slugurl 'tags' %}?tag={{ tag }}&id={{ page.id }}">
                                 <button class="alert alert-{% ml_obj_tag_border tag %} border-{% ml_obj_tag_border tag %}" type="button" data-toggle="tooltip" data-placement="top" title="{% ml_obj_tag_tooltip tag %}">{% ml_obj_tag_tooltip tag %} ({{ tag }})</button>
                             </a>
+                            {% endcomment %}
+
                             <a class="dropdown-item">
                                 <form method="post">
                                     {% csrf_token %}
@@ -48,8 +51,7 @@
                                     <input type="hidden" name="func_name" value="do_enable">
                                 </form>
                             </a>
-
-                            <a class="dropdown-item" href="#">Dropdown link</a>
+                            {# <a class="dropdown-item" href="#">Dropdown link</a>  #}
                         </div>
                      </div>
                 {% endfor %}
