@@ -22,6 +22,9 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
+# local modules
+from mall.scripts import MlButton
+
 # other tags, that can be used ☀ ⁇ ✅ ⛔ 🌦️ ‼
 # AUTOMATIC TAGS                symbol  description  border  influence
 obj_tag_dict = {
@@ -308,6 +311,31 @@ class MlObjectPage(Page):
         index.SearchField('description'),
     ]
 
+    def btn_status_action_on(self):
+        self.specific.status_ok = True
+        super(MlObjectPage, self).save()
+
+    def btn_status_action_off(self):
+        self.specific.status_ok = False
+        super(MlObjectPage, self).save()
+
+    btn_status = MlButton(
+        symbol_on="✔",
+        symbol_off=chr(9940),
+        name_on="статус Ok",
+        name_off="есть сбои",
+        state=status_ok,
+        alert_on="success",
+        alert_off="danger",
+        position=1,
+        btn_action_on=btn_status_action_on,
+        btn_action_off=btn_status_action_off
+
+    )
+
+    def btn_status_action(self):
+        self.btn_status.btn_action(obj=self)
+
     # logical block
     #    status                  symbol       description        alert      influence
     tag_dict = {
@@ -351,6 +379,7 @@ class MlObjectPage(Page):
     @status_bad.setter
     def status_bad(self, value):
         self.status_ok = not value
+        self.save()
 
     @property
     def is_disabled(self):
@@ -359,6 +388,7 @@ class MlObjectPage(Page):
     @is_disabled.setter
     def is_disabled(self, value):
         self.is_enabled = not value
+        self.save()
 
     @property
     def have_to_be_diagnosed(self):
@@ -367,6 +397,7 @@ class MlObjectPage(Page):
     @have_to_be_diagnosed.setter
     def have_to_be_diagnosed(self, value):
         self.diagnosed = not value
+        self.save()
 
     @property
     def need_service(self):
@@ -375,6 +406,7 @@ class MlObjectPage(Page):
     @need_service.setter
     def need_service(self, value):
         self.have_maintenance = not value
+        self.save()
 
     # functions from menu items
     def status_ok_to_bad(self):
@@ -422,8 +454,14 @@ class MlObjectPage(Page):
     def get_context(self, request, *args, **kwargs):
         func_name = request.POST.get('func_name')
         if func_name:
-            func = getattr(self, func_name)
-            func()
+            if '.' in func_name:
+                func_name_list = func_name.split('.')
+                if len(func_name_list) == 2:
+                    func = getattr(getattr(self, func_name_list[0]), func_name_list[1])
+                    func(self)
+            else:
+                func = getattr(self, func_name)
+                func()
         context = super().get_context(request)
         return context
 
