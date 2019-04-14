@@ -311,20 +311,30 @@ class MlObjectPage(Page):
         index.SearchField('description'),
     ]
 
-    def btn_status_action_on(self):
-        self.specific.status_ok = True
-        super(MlObjectPage, self).save()
+    def btn_status_action_on(self, obj):
+        print(obj.status_ok)
+        obj.status_ok = False
+        obj.save()
+        print(obj.status_ok)
+        pass
+        #self.specific.status_ok = True
+        #super(MlObjectPage, self).save()
 
-    def btn_status_action_off(self):
-        self.specific.status_ok = False
-        super(MlObjectPage, self).save()
+    def btn_status_action_off(self, obj):
+        print(obj.status_ok)
+        obj.status_ok = True
+        obj.save()
+        print(obj.status_ok)
+        pass
+        #self.specific.status_ok = False
+        #super(MlObjectPage, self).save()
 
     btn_status = MlButton(
         symbol_on="✔",
         symbol_off=chr(9940),
         name_on="статус Ok",
         name_off="есть сбои",
-        state=status_ok,
+        state_field=status_ok,
         alert_on="success",
         alert_off="danger",
         position=1,
@@ -333,8 +343,8 @@ class MlObjectPage(Page):
 
     )
 
-    def btn_status_action(self):
-        self.btn_status.btn_action(obj=self)
+    #def btn_status_action(self):
+    #    self.btn_status.btn_action()
 
     # logical block
     #    status                  symbol       description        alert      influence
@@ -452,6 +462,7 @@ class MlObjectPage(Page):
 
     # override get_context method
     def get_context(self, request, *args, **kwargs):
+        self.btn_status.get_orm_state(self)
         func_name = request.POST.get('func_name')
         if func_name:
             if '.' in func_name:
@@ -465,7 +476,7 @@ class MlObjectPage(Page):
         context = super().get_context(request)
         return context
 
-
+    """
     # override save method
     def save(self, *args, **kwargs):
 
@@ -484,7 +495,7 @@ class MlObjectPage(Page):
             if getattr(self, status):
                 self.auto_tags.add(obj_tag_dict[status][0])
 
-        """
+        ################
         if crit and is_crit:
             ancestors = reversed(self.get_ancestors())
             for ancestor in ancestors:
@@ -508,7 +519,7 @@ class MlObjectPage(Page):
                             is_crit = ancestor.specific.is_critical
         """
         #TODO: change tags claster (self.tags.add('auto_alarm',"events"))
-        super(MlObjectPage, self).save()
+        #super(MlObjectPage, self).save()
 
     # control panels
     content_panels = Page.content_panels + [

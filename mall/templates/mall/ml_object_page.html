@@ -36,7 +36,7 @@
         <form action="." method="post">
             {% csrf_token %}
             <button class="btn btn-primary" type="submit" title="enable">{{ page.btn_status.get_name }}</button>
-            <input id="btn_status" type="hidden" name="func_name" value="btn_status_action">
+            <input id="btn_status" type="hidden" name="func_name" value="btn_status.btn_action">
         </form>
 
 
