@@ -28,7 +28,7 @@ SECRET_KEY = 'dev key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']   # By default was empty list
 
 
 # Application definition
@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     # End of Wagtail block
+    # Async block
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +80,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_mall.urls'
+ASGI_APPLICATION = "django_mall.routing.application"
+#WSGI_APPLICATION = 'django_mall.wsgi.application'
 
 TEMPLATES = [
     {
@@ -100,7 +104,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_mall.wsgi.application'
+
 
 
 # Database

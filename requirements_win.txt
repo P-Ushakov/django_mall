@@ -3,3 +3,4 @@ pillow
 wagtail
 wagtail-autocomplete
 channels
+pypiwin32
