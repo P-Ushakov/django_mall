@@ -23,7 +23,7 @@ from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 # local modules
-from mall.scripts import MlButton
+from mall.scripts import MlButton, execute_func
 
 # other tags, that can be used ☀ ⁇ ✅ ⛔ 🌦️ ‼
 # AUTOMATIC TAGS                symbol  description  border  influence
@@ -312,22 +312,10 @@ class MlObjectPage(Page):
     ]
 
     def btn_status_action_on(self, obj):
-        print(obj.status_ok)
-        obj.status_ok = False
-        obj.save()
-        print(obj.status_ok)
         pass
-        #self.specific.status_ok = True
-        #super(MlObjectPage, self).save()
 
     def btn_status_action_off(self, obj):
-        print(obj.status_ok)
-        obj.status_ok = True
-        obj.save()
-        print(obj.status_ok)
         pass
-        #self.specific.status_ok = False
-        #super(MlObjectPage, self).save()
 
     btn_status = MlButton(
         symbol_on="✔",
@@ -340,11 +328,7 @@ class MlObjectPage(Page):
         position=1,
         btn_action_on=btn_status_action_on,
         btn_action_off=btn_status_action_off
-
     )
-
-    #def btn_status_action(self):
-    #    self.btn_status.btn_action()
 
     # logical block
     #    status                  symbol       description        alert      influence
@@ -462,17 +446,14 @@ class MlObjectPage(Page):
 
     # override get_context method
     def get_context(self, request, *args, **kwargs):
+        # check buttons ORM state on every page reload
         self.btn_status.get_orm_state(self)
+
+        # Execute function by name. If name have '.', execute last part
         func_name = request.POST.get('func_name')
-        if func_name:
-            if '.' in func_name:
-                func_name_list = func_name.split('.')
-                if len(func_name_list) == 2:
-                    func = getattr(getattr(self, func_name_list[0]), func_name_list[1])
-                    func(self)
-            else:
-                func = getattr(self, func_name)
-                func()
+        execute_func(self, func_name)
+
+        # execute main "get_context" function
         context = super().get_context(request)
         return context
 
