@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Wagtail block
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.routable_page',    # for multiple page endpoints
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -56,7 +57,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
-    # 'wagtail.api.v2'
+    # 'wagtail.api.v2',
     'modelcluster',
     'taggit',
     # End of Wagtail block
