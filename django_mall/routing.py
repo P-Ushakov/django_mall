@@ -10,7 +10,7 @@ application = ProtocolTypeRouter({
         AuthMiddlewareStack(
             URLRouter(
                 [
-                    url("^", MlObjectConsumer)
+                    url(r'\bml_object\b', MlObjectConsumer),
                 ]
             )
         )
