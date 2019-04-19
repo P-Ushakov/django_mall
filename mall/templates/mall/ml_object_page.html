@@ -28,15 +28,15 @@
             </div>
         {% endif %}
 
-        <form action="." method="post">
+        <form id="btn_status" action="." method="post">
             {% csrf_token %}
-            <button class="btn btn-primary" type="submit" title="enable">{{ page.btn_status.get_symbol }}</button>
-            <input id="btn_status" type="hidden" name="func_name" value="btn_status.btn_action">
+            <button id="btn_status_btn" class="btn btn-primary" type="submit" title="enable">{{ page.btn_status.get_symbol }}</button>
+            <input id="btn_status_input" type="hidden" name="func_name" value="btn_status.btn_action">
         </form>
         <form action="." method="post">
             {% csrf_token %}
             <button class="btn btn-primary" type="submit" title="enable">{{ page.btn_status.get_name }}</button>
-            <input id="btn_status" type="hidden" name="func_name" value="btn_status.btn_action">
+            <input type="hidden" name="func_name" value="btn_status.btn_action">
         </form>
 
 
@@ -110,6 +110,9 @@
         // websocket scripts
         // console.log(window.location)
         var loc = window.location
+        var btnStatusForm = $("#btn_status")
+        var btnStatusBtn = $("#btn_status_btn")
+        var btnStatusInput = $("#btn_status_input")
         var wsStart = 'ws://'
         if (loc.protocol == 'https:') {
             wsStart = 'wss://'
@@ -122,6 +125,17 @@
         }
         socket.onopen = function(e){
             console.log("open", e)
+            console.log(btnStatusForm)
+            btnStatusForm.submit(function (event) {
+                event.preventDefault()
+                console.log(btnStatusInput)
+                var btnStatusInputName = btnStatusInput[0].name
+                var btnStatusInputValue = bt
+                var btn_symbol = btnStatusBtn[0].innerText
+                console.log(btn_symbol)
+                console.log(inputName)
+                btnStatusBtn[0].innerText = "V"
+            })
             var id_data = {
                 'id': {{ page.id }}
             }

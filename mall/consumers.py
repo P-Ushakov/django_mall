@@ -10,6 +10,10 @@ from .models import MlObjectPage
 
 class MlObjectConsumer(AsyncConsumer):
 
+    def __init__(self, *args, **kwargs):
+        self.page = None
+        super().__init__(*args, **kwargs)
+
     async def websocket_connect(self, event):
         # when the socket connects
         print("connected", event)
@@ -26,15 +30,14 @@ class MlObjectConsumer(AsyncConsumer):
         # when a message is received from websocket
         print("receive", event)
         front_text = event.get('text', None)
-
+        front_data = None
         if front_text:
                 front_data = json.loads(front_text)
 
         page_id = front_data.get('id', None)
         if page_id:
-            print("page id:", page_id)
-            page = await self.get_page_by_id(page_id)
-            print(page)
+            self.page = await self.get_page_by_id(page_id)
+
 
     async def websocket_disconnect(self, event):
         # when the socket disconnects
