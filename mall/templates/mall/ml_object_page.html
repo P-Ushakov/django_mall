@@ -126,15 +126,20 @@
         socket.onopen = function(e){
             console.log("open", e)
             console.log(btnStatusForm)
+            //btnStatusForm.submit(btn_action_by_websocket(btnStatusForm, event))
             btnStatusForm.submit(function (event) {
                 event.preventDefault()
                 console.log(btnStatusInput)
                 var btnStatusInputName = btnStatusInput[0].name
-                var btnStatusInputValue = bt
-                var btn_symbol = btnStatusBtn[0].innerText
-                console.log(btn_symbol)
-                console.log(inputName)
-                btnStatusBtn[0].innerText = "V"
+                var btnStatusInputValue = btnStatusInput[0].value
+                var btn_data= {};
+                btn_data[btnStatusInputName] = btnStatusInputValue
+                //btn_data.push(btnStatusInputName, btnStatusInputValue)
+                socket.send(JSON.stringify(btn_data))
+                //var btn_symbol = btnStatusBtn[0].innerText
+                //console.log(btnStatusInput)
+                //console.log(btnStatusInputName)
+                //btnStatusBtn[0].innerText = "V"
             })
             var id_data = {
                 'id': {{ page.id }}

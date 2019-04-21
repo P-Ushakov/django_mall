@@ -6,6 +6,7 @@ from channels.db import database_sync_to_async
 from wagtail.core.models import Page
 
 from .models import MlObjectPage
+from .scripts import execute_func
 
 
 class MlObjectConsumer(AsyncConsumer):
@@ -20,7 +21,7 @@ class MlObjectConsumer(AsyncConsumer):
         await self.send({
             "type": "websocket.accept"
         })
-        await asyncio.sleep(3)
+        await asyncio.sleep(1)
         await self.send({
             "type": "websocket.send",
             "text": "Successfully connected to " + self.__repr__()
@@ -36,7 +37,10 @@ class MlObjectConsumer(AsyncConsumer):
 
         page_id = front_data.get('id', None)
         if page_id:
-            self.page = await self.get_page_by_id(page_id)
+            self.page = await self.get_page_by_id(MlObjectPage, page_id)
+        func_name = front_data.get('func_name', None)
+        if func_name:
+            execute_func(self.page, func_name)
 
 
     async def websocket_disconnect(self, event):
@@ -44,6 +48,7 @@ class MlObjectConsumer(AsyncConsumer):
         print("disconnected", event)
 
     @database_sync_to_async
-    def get_page_by_id(self, page_id):
-        page = Page.objects.get(id=page_id)
+    def get_page_by_id(self, page_type, page_id):
+        # page = Page.objects.get(id=page_id)
+        page = page_type.objects.get(id=page_id)
         return page
