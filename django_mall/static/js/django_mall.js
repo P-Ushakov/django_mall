@@ -1,6 +1,6 @@
-function btn_action_by_websocket (btn, event) {
+function btn_action_by_websocket (event) {
     event.preventDefault();
-    console.log(btn);
+    console.log(event);
     //var btnStatusInputName = btnStatusInput[0].name;
     //var btnStatusInputValue = btnStatusInput[0].value;
     //var btn_data= {};
