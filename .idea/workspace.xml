@@ -4,8 +4,7 @@
     <list default="true" id="80919050-ad6e-4985-b1ac-9722d8dfd035" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_mall/static/js/django_mall.js" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/static/js/django_mall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_mall/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_mall/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,18 +31,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mall/models/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-              <folding>
-                <element signature="e#87#115#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/scripts/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -74,11 +61,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="129" column="43" lean-forward="true" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
+            <state relative-caret-position="3159">
+              <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
             </state>
           </provider>
         </entry>
@@ -199,18 +195,18 @@
         <option value="$PROJECT_DIR$/requirements_win.txt" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/django_mall/asgi.py" />
-        <option value="$PROJECT_DIR$/django_mall/settings.py" />
         <option value="$PROJECT_DIR$/django_mall/routing.py" />
         <option value="$PROJECT_DIR$/mall/consumers.py" />
         <option value="$PROJECT_DIR$/django_mall/templates/base.html" />
         <option value="$PROJECT_DIR$/django_mall/static/js/django_mall.js" />
         <option value="$PROJECT_DIR$/mall/templates/mall/ml_object_page.html" />
+        <option value="$PROJECT_DIR$/django_mall/settings.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1358" />
-    <option name="y" value="-8" />
+    <option name="x" value="-462" />
+    <option name="y" value="132" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -228,28 +224,6 @@
             <path>
               <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
               <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="django_mall" type="b2602c69:ProjectViewProjectNode" />
-              <item name="django_mall" type="462c0819:PsiDirectoryNode" />
-              <item name="mall" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -388,12 +362,14 @@
       <workItem from="1555524448894" duration="3002000" />
       <workItem from="1555663927204" duration="11335000" />
       <workItem from="1555843527193" duration="10611000" />
-      <workItem from="1555953100820" duration="36000" />
+      <workItem from="1555953100820" duration="672000" />
+      <workItem from="1556034248398" duration="809000" />
+      <workItem from="1557563694643" duration="6777000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="353094000" />
+    <option name="totallyTimeSpent" value="361316000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -405,15 +381,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14392324" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20877458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.100758396" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49756888" weight="0.21018419" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49756888" weight="0.47790506" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43509865" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -422,7 +398,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32917964" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32917964" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5024311" side_tool="true" weight="0.5807504" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.23618636" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.20621932" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32917964" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="14" weight="0.32952693" />
@@ -678,13 +654,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="865">
-          <caret line="49" column="69" selection-start-line="49" selection-start-column="69" selection-end-line="49" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/django_mall/static/js/jquery-3.3.1.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -777,8 +746,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mall/templates/mall/ml_object_page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="129" column="43" lean-forward="true" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
+        <state relative-caret-position="3159">
+          <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_mall/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
         </state>
       </provider>
     </entry>

@@ -12,12 +12,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Wagtail block
-PROJECT_DIR = os.path.dirname(BASE_DIR)
-# End of Wagtail block
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -88,10 +87,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # wagtail block
-            # os.path.join(PROJECT_DIR, 'templates'),
-            os.path.join(PROJECT_DIR, 'django_mall', 'django_mall', 'templates'),
-            # end of wagtail block
+            os.path.join(PROJECT_DIR, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -104,9 +100,6 @@ TEMPLATES = [
         },
     },
 ]
-
-
-
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -165,7 +158,7 @@ STATICFILES_FINDERS = [
 ]
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
-    os.path.join(PROJECT_DIR, 'django_mall', 'django_mall', 'static'), ]
+    ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
